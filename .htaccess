@@ -1,0 +1,28 @@
+Options +FollowSymLinks
+
+RewriteEngine On
+
+<IfModule mod_headers.c>
+	<FilesMatch "\.(js|css)$">
+	  Header set Cache-Control "max-age=2592000"
+	</FilesMatch>
+	<FilesMatch "\.(jpg|jpeg|png)$">
+	  Header set Cache-Control "max-age=604800"
+	</FilesMatch>
+</IfModule>
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} (.*)
+RewriteCond %{REQUEST_URI} /$ [NC]
+RewriteRule ^(.*)(/)$ $1 [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www\.mon-paris\.ru$ [NC]
+RewriteRule ^(.*)$ http://mon-paris.ru/$1 [R=301,L]
+
+RewriteRule ^(.*)(.tpl)$ $1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /?param=$1 [L]
+
+AddHandler application/x-httpd-php .html .htm

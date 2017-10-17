@@ -1,0 +1,159 @@
+/*** STICKY LAYER CSS ***/
+
+.stickyLayer {
+    display: block;
+    text-align: center;    
+    background:transparent;
+}
+
+.stickyLayer .content {        
+	margin: 0 auto;
+	padding: 0;        
+	display: block;
+	height: auto;
+	width: auto;
+}
+    
+.fixedWidth {
+overflow: hidden;
+position: relative;
+width: 980px;
+margin: 0 auto;
+}
+
+#layerFirstVisit {
+    background: url('/img/r14_bg_layer_newsletter2.png') no-repeat center top;
+    width: 100%;
+    border-bottom: 1px solid #2e2e2e;
+    color: #6e6e6e;
+}
+
+#layerFirstVisit #firstVisitContainer {
+	position: relative;
+}
+
+#layerFirstVisit #firstVisitContainer .fixedWidth {
+	width: 960px;
+}
+
+
+#layerFirstVisit #layerTop {
+	height: 45px;
+	width: 100%;
+}
+
+#layerFirstVisit #layerTop #closeLayer {
+	color: #000;
+	float: right;
+	font-size: 2.4em;
+	font-weight: bold;
+	height: 37px;
+	line-height: 30px;
+	padding-top: 7px;
+	text-align: center;
+	width: 40px;
+	_padding-top: 0;
+	_line-height: 30px;
+	text-indent: -100px;
+	overflow: hidden;
+}
+
+#layerFirstVisit #news {
+	font-family: "PT Sans",sans-serif;
+	font-size: 22px;
+}
+
+#layerFirstVisit #layerTop #closeLayer:hover {
+	color: #666666;
+}
+
+#layerFirstVisit #newsletterMessage {
+	width: 470px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+#layerFirstVisit #newsletterContent {
+	width: 490px;
+	height: auto;
+	padding: 10px 0;
+	_width: 390px;
+	margin: 0 auto;
+}
+
+#layerFirstVisit #newsletterContent .layerNewsletterText {
+	font-size: 1.2em;
+	line-height: 1.1em;
+	margin-bottom: 10px;
+	text-align: left;  
+}
+
+
+#layerFirstVisit #layerNewsletterContainer {
+	overflow: hidden;
+}
+
+#layerFirstVisit #layerNewsletterContainer form {
+	overflow: hidden;
+	width: 410px;
+	margin: 0 auto;
+}
+
+#layerFirstVisit #layerNewsletterContainer .appform {
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+#layerFirstVisit #layerNewsletterContainer .hiddenButActive {
+	opacity: 0;
+}
+
+#layerFirstVisit #newsletterContent #campaignMailEmail {
+	border: 1px solid #6e6e6e;
+	font-size: 1.3em;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 0;
+	padding-left: 10px;
+	width: 395px;
+}
+
+#layerFirstVisit #newsletterContent #campaignNewsletterSubmit {
+	background-color: #2e2e2e;
+	color: #e6e6e6;
+	font-size: 1.2em;
+	height: 28px;
+	line-height: 28px;
+	padding: 0;
+	position: absolute;
+	right: 6px;
+	top: 7px;
+	width: 100px;
+}
+
+#layerFirstVisit #newsletterContent .titleSex {
+	font-size: 1.3em;
+	display: block;
+	float: left;
+	line-height: 1.2em;
+	margin-right: 30px;
+	top: 0;
+	position: relative;
+	display: none;
+}
+
+#layerFirstVisit #newsletterContent label {
+	margin-right: 10px;
+	font-size: 1.3em;
+}
+
+#layerFirstVisit #layerNewsletterContainer .field-validation-error, #layerFirstVisit #layerNewsletterContainer .field-validation-valid {
+	height: 26px;
+	line-height: 26px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	top: 37px;
+	padding: 0 5px;
+}
