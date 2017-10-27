@@ -42,22 +42,31 @@
     <div class="gd_view_out">
         <div class="container">			
             <div class="gd_im">
-				<div class="gd_im_inn">
 <?php
-				if ($product_image_path != "")
-					echo "<table><tr><td><img src='http://mon-paris.ru/goods_images/".$product_image_path."' alt=''></td></tr></table>";
-?>
-                    <div class="im_list">
-<?php
-						echo "<a rel='gd_fansy' class='fancybox item act' href='http://mon-paris.ru/goods_images/".$product_image_path."' style='background-image: url(http://mon-paris.ru/goods_images/".$product_image_path.");'><div></div></a>";
-						reset($vec_product_images);																	
-						foreach ($vec_product_images as $key => $value) 
-						{
-							echo "<a rel='gd_fansy' class='fancybox item' href='http://mon-paris.ru/goods_images/".$key."' style='background-image: url(http://mon-paris.ru/goods_images/".$key.");'><div></div></a>";
-						}
-?>
-                    </div>
-<?php
+				//if ($productID == 'perchatki-kozhanye-julie-10945')
+				//	echo "<div class=\"gd_im_inn\" style=\"padding-left:0px;\">";
+				//else
+					echo "<div class=\"gd_im_inn\">";
+				
+					if ($product_image_path != "")
+					{
+						//if ($productID == 'perchatki-kozhanye-julie-10945')
+						//	echo "<table><tr><td><div class='pro360'><img src='http://mon-paris.ru/1000px/001.jpg' alt=''></div></td></tr></table>";
+						//else
+							echo "<table><tr><td><img src='http://mon-paris.ru/goods_images/".$product_image_path."' alt=''></td></tr></table>";
+					}
+
+					//if ($productID != 'perchatki-kozhanye-julie-10945') {
+						echo "<div class='im_list'>";
+							echo "<a rel='gd_fansy' class='fancybox item act' href='http://mon-paris.ru/goods_images/".$product_image_path."' style='background-image: url(http://mon-paris.ru/goods_images/".$product_image_path.");'><div></div></a>";
+							reset($vec_product_images);																	
+							foreach ($vec_product_images as $key => $value) 
+							{
+								echo "<a rel='gd_fansy' class='fancybox item' href='http://mon-paris.ru/goods_images/".$key."' style='background-image: url(http://mon-paris.ru/goods_images/".$key.");'><div></div></a>";
+							}
+						echo "</div>";
+					//}
+					
 					echo "<div class='metk'>";
 					if ($product_discount > 0 && $product_price > 10)
 						echo "<div class='disc'><div>- ".$product_discount."%</div></div>";
@@ -65,7 +74,6 @@
 						echo "<div class='new'><div>new</div></div>";
 					echo "</div>";
 ?>
-                    <!--<div class="new"><div>new</div></div>/-->
                     <div class="gd_fansy_out">
 <?php
 					if ($product_image_path != "")

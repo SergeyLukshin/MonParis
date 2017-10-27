@@ -494,18 +494,35 @@ END2;
 					if (User::isAuthorized())
 						echo "$(\"#user_region\").val(\"".$region."\");\n";
 				}
-?>
-				/*document.getElementById('user_wholesale').change = function() {
-					if (document.getElementById('user_wholesale').checked) 
-						document.getElementById('wholesale_info').style.display = 'block'; 
-					else 
-						document.getElementById('wholesale_info').style.display = 'none';
-				};*/
-				
-<?php
+
 				if ($detail != 0)
 				{
-					echo "product_color_change();";
+echo <<< END2
+					product_color_change();
+					/*Config = {
+							"item": {
+								"allow360X":true,
+								"interaction": "mousemove", // "drag"
+								"impetus": "true", //"false"
+								"containerSelector": ".pro360",
+								"autoplay": {"interval": 100, "bounce": false},//frame timeout
+								"folder":"/500px/",
+								"zoomfolder":"/1000px/",
+								"file": function(x,y) {	return pad(72 * y + x, 3) + ".jpg"},	//"000" slice(-3)	
+								"type": "rect",
+								"startX":1,
+								"minX": 1,
+								"maxX": 73,
+								"startY":0,
+								"minY": 0,
+								"maxY": 5,
+								"width": 320,
+								"height": 320,
+								"zoomfactor": 3
+							}
+						}					
+					window.item = new PRO360(Config.item);*/
+END2;
 				}
 				
 				if ($main != 0 && $cnt_news > 0)

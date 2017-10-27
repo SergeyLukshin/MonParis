@@ -26,6 +26,13 @@
 	if ($detail === 1)
 	{
 		echo "<link href=\"/js/jquery.fancybox/jquery.fancybox.css\" rel=\"stylesheet\">\n";
+		//echo "<link href=\"/3d/css/pro360.css\" media=\"screen, projection\" rel=\"stylesheet\" type=\"text/css\" />";
+		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/underscore.js\"></script>";
+		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/konva.js\"></script>";
+		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/TweenMax.min.js\"></script>";
+		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/pre-loader.js\"></script>";
+		//echo "<script type=\"text/javascript\" src=\"/3d/js/preloader.js\"></script>";
+		//echo "<script type=\"text/javascript\" src=\"/3d/js/pro360.min.js\"></script>";
 	}
 	if ($main === 1)
 	{

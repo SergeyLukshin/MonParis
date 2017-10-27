@@ -1,35 +1,50 @@
-<!--
-<div id="layerFirstVisit" style="height: 220px;">
-	<div id="firstVisitContainer" style="height: 190px;">
+ <style type="text/css">
+   A {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+   } 
+   A:hover { 
+    text-decoration: underline; /* Добавляем подчеркивание при наведении курсора на ссылку */
+    color: red; /* Ссылка красного цвета */
+   } 
+  </style>
+
+<div id="layerFirstVisit" >
+	<div id="firstVisitContainer" >
 		<div class="fixedWidth">
 			<div id="layerTop">
-				<a id="closeLayer" href="#">х</a>
+				<a id="closeLayer" href="#"></a>
 			</div>
-			<div id = "news">
-Не работаем по ВОСКРЕСЕНЬЯМ до 13 августа <p>понедельник суббота с 9-30 до 19-00</p>
-			</div>        
-		</div>
-	</div> 
-</div>
--->
 
-<div id="layerFirstVisit" style="height: 380px;">
-	<div id="firstVisitContainer" style="height: 190px;">
-		<div class="fixedWidth">
-			<div id="layerTop">
-				<a id="closeLayer" href="#">х</a>
+			<div class="row">
+				<div class = "col-md-6 col-sm-12">
+							<font color='blue' size=4 > <b>МЕЖСЕЗОННЫЕ АКЦИИ И СКИДКИ: </b></font> <br>
+							<font color='blue' size=4> в течении недели с 21 по 28 октября </font> <br>
+							<font color='red' size=4> <b>скидка 40%</b> </font> 
+							<font color='blue' size=4> на ВСЕ коллекции </font> 
+							<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"><font color='red' size=4> <b>Elisa Fanti</b></font> </a> <br>
+							<font color='blue' size=1> <i>Cкидки действуют на товар заказанный и оплаченный в период акции.<br> 
+Акционный товар не может быть  отправлен наложенным платежом </i>
+</font> <br>
+											</div>
+				<div class = "col-md-6 col-sm-12">
+						
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14892_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15007_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14948_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15004_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15134_1.jpg"   width='110'></a>
+						
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15065_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14955_1.jpg"   width='110'></a>
+						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14895_1.jpg"   width='110'></a>
+						
+				</div>
 			</div>
-			<div id = "news">
-C 10 сентября по 10 октября<br>
-СКИДКА 70% НА ВСЕ КОЛЛЕКЦИИ GIANI FORTE<br>
-<a href="http://mon-paris.ru/catalog/GIANI-FORTE" title="Перейти в каталог Giani Forte">
-<img src="http://mon-paris.ru/img/Mailing_6sept2016/gf1.jpg"   width='160'>
-<img src="http://mon-paris.ru/img/Mailing_6sept2016/gf2.jpg"   width='160'>
-<img src="http://mon-paris.ru/img/Mailing_6sept2016/gf3.jpg"   width='160'>
-<img src="http://mon-paris.ru/img/Mailing_6sept2016/gf4.jpg"   width='160'>
-<img src="http://mon-paris.ru/img/Mailing_6sept2016/gf5.jpg"   width='160'>
-</a>
-
+			<div class="row">
+				<div class="col-xs-12">
+					<a id="closeLayer" href="#">Закрыть</a>
+				</div>
+			</div>
 		</div>
-	</div> 
+	</div>                                                                        
 </div>
