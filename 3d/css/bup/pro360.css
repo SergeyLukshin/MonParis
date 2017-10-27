@@ -1,0 +1,84 @@
+.pro360  canvas {
+    backface-visibility: hidden;
+    transform: translate3d(0px, 0px, 0px);
+}
+.pro360-progress {
+    width: 100px;   	
+    left: 50%;
+    margin-left: -50px;
+    position: absolute;
+    top: 50%;
+    height: 5px;
+}
+
+.pro360-toolbox {
+    height: 96px;
+}
+
+.pro360-rotatebuttons {
+    height: 96px;
+    width: 96px;
+    position: relative;
+    margin:auto;
+    
+}
+
+.pro360-up {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/up.png);
+    position: absolute;
+    top: 0px;
+    left: 32px;
+}
+.pro360-up:hover {
+    background-image: url(./skin/up__o.png);
+}
+
+.pro360-left {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/left.png);
+    position: absolute;
+    top: 32px;
+    left: 0px;
+}
+.pro360-left:hover {
+    background-image: url(./skin/left__o.png);
+}
+
+.pro360-right {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/right.png);
+    position: absolute;
+    top: 32px;
+    left: 64px;
+}
+.pro360-right:hover {
+    background-image: url(./skin/right__o.png);
+}
+
+.pro360-down {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/down.png);
+    position: absolute;
+    top: 64px;
+    left: 32px;
+}
+.pro360-down:hover {
+    background-image: url(./skin/down__o.png);
+}
+
+.pro360-zoom {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/zoomin.png);
+    position: absolute;
+    top: 32px;
+    left: 32px;
+}
+.pro360-zoom:hover {
+    background-image: url(./skin/zoomin__o.png);
+}

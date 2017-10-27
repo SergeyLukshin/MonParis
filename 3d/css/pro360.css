@@ -1,0 +1,129 @@
+.pro360  canvas {
+    backface-visibility: hidden;
+    transform: translate3d(0px, 0px, 0px);
+    cursor: url("./skin/magnifier.cur"), pointer;
+}
+
+.pro360-progress-panel-text:after {
+    
+    content: "Загрузка ...";  
+}
+
+.pro360-progress-panel {
+    color: #333;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 13pt;
+    line-height: 13pt;
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    max-width: 90%;
+    background-color: rgba(255,255,255,0.6);
+    border: 1px solid #000;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 15px;
+    box-shadow: 0 0 2px #222;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.pro360-progress {
+    margin-top: 10px;
+    width: 90%;   	
+    top: 50%;
+    height: 12px;
+    background-color:#DCDCDC;
+    border:1px solid #dcdcdc;
+    border-radius:8px;
+    margin-left:5%;
+}
+
+.pro360-progress-bar {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#c5c5c5), to(#ffffff));
+    background-image: -moz-linear-gradient(bottom, #c5c5c5, #ffffff);
+    background-image: -o-linear-gradient(90deg,#c5c5c5 0%, #ffffff 100%);
+    background-image: -ms-linear-gradient(90deg,#c5c5c5 0%, #ffffff 100%);
+    background-image: linear-gradient(90deg,#c5c5c5 0%, #ffffff 100%);
+    height:100%;
+    border-radius: 8px;
+}
+
+
+.pro360-toolbox {
+    height: 96px;
+}
+
+.pro360-rotatebuttons {
+    height: 96px;
+    width: 96px;
+    position: relative;
+    margin:auto;
+    
+}
+
+.pro360-up {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/up.png);
+    position: absolute;
+    top: 0px;
+    left: 32px;
+}
+.pro360-up:hover {
+    background-image: url(./skin/up__o.png);
+}
+
+.pro360-left {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/left.png);
+    position: absolute;
+    top: 32px;
+    left: 0px;
+}
+.pro360-left:hover {
+    background-image: url(./skin/left__o.png);
+}
+
+.pro360-right {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/right.png);
+    position: absolute;
+    top: 32px;
+    left: 64px;
+}
+.pro360-right:hover {
+    background-image: url(./skin/right__o.png);
+}
+
+.pro360-down {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/down.png);
+    position: absolute;
+    top: 64px;
+    left: 32px;
+}
+.pro360-down:hover {
+    background-image: url(./skin/down__o.png);
+}
+
+.pro360-zoom {
+    width: 32px;
+    height: 32px;
+    background-image: url(./skin/zoomin.png);
+    position: absolute;
+    top: 32px;
+    left: 32px;
+}
+.pro360-zoom:hover {
+    background-image: url(./skin/zoomin__o.png);
+}
