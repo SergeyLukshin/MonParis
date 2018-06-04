@@ -136,7 +136,7 @@
 								<div class="radio">
 
 									<a href="#" class="item sel" data-val="1">
-										<span class="stitle"><span>Доставка по Москве 350 руб.</span></span>
+										<span class="stitle"><span>Доставка по Москве 400 руб.</span></span>
 										<span class="ico ico_cart_deliv_1"></span>
 										<span class="stat">Moscow</span>
 										<span class="rad"></span>

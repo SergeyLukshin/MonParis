@@ -33,18 +33,6 @@
 					}									
 				}
 			}
-			/*if ($col_list === 1 && $collection != "")
-			{
-				reset($vec_collection);																	
-				foreach ($vec_collection as $key => $value) 
-				{
-					if ($key == (int)$collection)
-					{
-						echo "<li>".strtoupper($value)."</li>";
-						break;
-					}									
-				}
-			}*/
 			if ($new_col_list === 1 && $new_collection != "")
 			{
 				reset($vec_new_collection);																	
@@ -56,19 +44,6 @@
 						break;
 					}									
 				}
-				
-				/*$query = "SELECT MP_SEASON.SeasonName, MP_BRAND.BrandName FROM MP_BRAND_SEASON INNER JOIN MP_SEASON ON MP_SEASON.SeasonID = MP_BRAND_SEASON.SeasonID ";
-				$query = $query."INNER JOIN MP_BRAND ON MP_BRAND.BrandID = MP_BRAND_SEASON.BrandID "; 
-				$query = $query."WHERE MP_BRAND_SEASON.GroupID = ".$new_collection; 
-
-				$result_col = mysql_query($query); 
-				
-				while ($row = mysql_fetch_array($result_col)):
-					echo "<li>Коллекция ".$row["BrandName"]." ".$row["SeasonName"]."</li>";
-					$brend = $row["BrandName"];
-					break;
-				endwhile;
-				mysql_free_result($result_col);*/
 			}
 			if ($bigsizes === 1)
 			{
@@ -89,7 +64,7 @@
 	<div class="catalog_out">
 		<div class="container">
 
-			<div class="left_menu_out">
+			<div class="left_menu_out hidden-xs">
 
 				<ul class="left_menu_inn">
 

@@ -7,8 +7,7 @@
 
             <div class="item">
                 <div class="item_out">
-                 <div class="item_inn" style="background-image: url(img/_collect_1.jpg);">
-					 <a href="/catalog/bolshie-razmery"> 
+                 <div class="item_inn" style="background-image: url(img/_collect_1.jpg);"><a href="/catalog/ELISA-FANTI-leto-2018"> 
 						<table><tr><td>Большие размеры</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
@@ -20,9 +19,8 @@
 
             <div class="item">
                 <div class="item_out">
-                     <div class="item_inn" style="background-image: url(img/_collect_2.jpg);">
-						 <a href="/catalog/AGNELLE"> 
-							<table><tr><td>Шарфы и перчатки</td></tr></table>
+                     <div class="item_inn" style="background-image: url(img/_collect_2.jpg);"><a href="/catalog/LEO-GUY-leto-2018"> 
+							<table><tr><td>Трикотаж из Франции</td></tr></table>
 							<div class="optic"></div>
 							<div class="button"><button>посмотреть</button></div>
 						</a>
@@ -33,7 +31,7 @@
 
             <div class="item">
                 <div class="item_out">
-                    <div class="item_inn" style="background-image: url(img/_collect_3.jpg);"><a href="/catalog/LEO-GUY">
+                    <div class="item_inn" style="background-image: url(img/_collect_3.jpg);"><a href="/catalog/TIZIANO-SANTANDREA-leto-2018">
                         <table><tr><td>Женщинам</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
@@ -44,7 +42,7 @@
 
             <div class="item">
                 <div class="item_out">
-                    <div class="item_inn" style="background-image: url(img/_collect_4.jpg);"><a href="/catalog/devushkam">
+                    <div class="item_inn" style="background-image: url(img/_collect_4.jpg);"><a href="/catalog/LEO-GUY-leto-2018">
                         <table><tr><td>Девушкам</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
@@ -61,12 +59,12 @@
             <div class="first_slider">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li style="background-image: url(img/_top_slider_1.jpg);">
+                        <li style="background-image: url(img/_top_slider_11.jpg);">
                             <div class="inn">
                                 <div class="tx">  
                                     <img src="img/_top_slider_1_tx.png" alt=""> 
                                  </div>
-                                <a class="more2" href="/catalog/ELISA-FANTI">подробнее</a>
+                                <a class="more" href="/catalog/ELISA-FANTI-zima-2018">подробнее</a>
                             </div>
                         </li>
                         <li style="background-image: url(img/_top_slider_2.jpg);">

@@ -692,7 +692,7 @@ _END;
 				$mail_str_query = $mail_str_query."<b>Контактный телефон : </b> ".$user_tel."<br>";
 				$mail_str_query = $mail_str_query."<b>Регион : </b> ".$user_region."<br>";
 				if ($delivery_type == 1)
-					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по Москве (350 руб.)<br>";
+					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по Москве (400 руб.)<br>";
 				if ($delivery_type == 2)
 					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по России (стоимость в РЕГИОНЫ должна быть согласована с менеджерами)<br>";
 				if ($delivery_type == 3)
@@ -708,7 +708,7 @@ _END;
 				$mail_str_query2 = $mail_str_query2."<b>Желаемый размер : </b> ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см<br>";
 				$mail_str_query2 = $mail_str_query2."<b>Контактный телефон : </b> ".$user_tel."<br>";
 				if ($delivery_type == 1)
-					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по Москве (350 руб.)<br>";
+					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по Москве (400 руб.)<br>";
 				if ($delivery_type == 2)
 					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по России (стоимость в РЕГИОНЫ должна быть согласована с менеджерами)<br>";
 				if ($delivery_type == 3)
@@ -783,13 +783,13 @@ _END;
 				{
 					if (User::getPriceInEuro() == "1")
 					{
-						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб.<br></body></html>";
-						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб.<br></body></html>";
+						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
+						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
 					}
 					else
 					{
-						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб. = ".number_format($this->total + 350, 0, '.', '')." ".$curr."<br></body></html>";
-						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб. = ".number_format($this->total + 350, 0, '.', '')." ".$curr."<br></body></html>";
+						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
+						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
 					}
 				}
 				else
@@ -915,7 +915,7 @@ _END;
 				$mail_str_query = $mail_str_query."<b>Контактный телефон : </b> ".$user_tel."<br>";
 				$mail_str_query = $mail_str_query."<b>Регион : </b> ".$user_region."<br>";
 				if ($delivery_type == 1)
-					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по Москве (350 руб.)<br>";
+					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по Москве (400 руб.)<br>";
 				if ($delivery_type == 2)
 					$mail_str_query = $mail_str_query."<b>Способ доставки : </b> доставка по России (стоимость в РЕГИОНЫ должна быть согласована с менеджерами)<br>";
 				if ($delivery_type == 3)
@@ -933,7 +933,7 @@ _END;
 				$mail_str_query2 = $mail_str_query2."<b>Желаемый размер : </b> ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см<br>";
 				$mail_str_query2 = $mail_str_query2."<b>Контактный телефон : </b> ".$user_tel."<br>";
 				if ($delivery_type == 1)
-					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по Москве (350 руб.)<br>";
+					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по Москве (400 руб.)<br>";
 				if ($delivery_type == 2)
 					$mail_str_query2 = $mail_str_query2."<b>Способ доставки : </b> доставка по России (стоимость в РЕГИОНЫ должна быть согласована с менеджерами)<br>";
 				if ($delivery_type == 3)
@@ -1011,13 +1011,13 @@ _END;
 				{
 					if (User::getPriceInEuro() == "1")
 					{
-						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб.<br></body></html>";
-						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб.<br></body></html>";
+						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
+						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
 					}
 					else
 					{
-						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб. = ".number_format($this->total + 350, 0, '.', '')." ".$curr."<br></body></html>";
-						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 350 руб. = ".number_format($this->total + 350, 0, '.', '')." ".$curr."<br></body></html>";
+						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
+						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
 					}
 				}
 				else

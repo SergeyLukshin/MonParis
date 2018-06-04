@@ -10,6 +10,26 @@
 
 	include_once ("top.tpl");
 ?>
+<!-- Google Code for &#1047;&#1072;&#1096;&#1077;&#1083; &#1074; &#1050;&#1086;&#1088;&#1079;&#1080;&#1085;&#1072; Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1038736007;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "oBpyCMrUonUQh7Wn7wM";
+var google_conversion_value = 5.00;
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1038736007/?value=5.00&amp;currency_code=USD&amp;label=oBpyCMrUonUQh7Wn7wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 
         <div class="clearfix"></div>
 

@@ -17,27 +17,19 @@
 
 			<div class="row">
 				<div class = "col-md-6 col-sm-12">
-							<font color='blue' size=4 > <b>МЕЖСЕЗОННЫЕ АКЦИИ И СКИДКИ: </b></font> <br>
-							<font color='blue' size=4> в течении недели с 21 по 28 октября </font> <br>
-							<font color='red' size=4> <b>скидка 40%</b> </font> 
-							<font color='blue' size=4> на ВСЕ коллекции </font> 
-							<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"><font color='red' size=4> <b>Elisa Fanti</b></font> </a> <br>
-							<font color='blue' size=1> <i>Cкидки действуют на товар заказанный и оплаченный в период акции.<br> 
-Акционный товар не может быть  отправлен наложенным платежом </i>
-</font> <br>
-											</div>
+							<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO & UGO ">
+							<font color='blue' size=4 > <b>Получена новая весенне-летняя коллекция Leo Guy (Leo & Ugo) </b></font> </a> <br> 
+
+							<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO & UGO ">
+							<font color='blue' size=4 > <b>Перейти в каталог Elisa Fanti </b></font> <br></a> </font> <br>
+				</div>
 				<div class = "col-md-6 col-sm-12">
-						
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14892_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15007_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14948_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15004_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15134_1.jpg"   width='110'></a>
-						
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/15065_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14955_1.jpg"   width='110'></a>
-						<a href="http://mon-paris.ru/catalog/ELISA-FANTI" TITLE="В КАТАЛОГ ELISA-FANTI"> 		<img src="http://mon-paris.ru/goods_images/14895_1.jpg"   width='110'></a>
-						
+											
+						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GU">		<img src="http://mon-paris.ru/goods_images/15958_1.jpg"   height='150'></a>
+						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/15967_1.jpg"   height='150'></a>
+						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/15975_1.jpg"   height='150'></a>
+						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/16029_1.jpg"   height='150'></a>
+
 				</div>
 			</div>
 			<div class="row">

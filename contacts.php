@@ -3,6 +3,27 @@
 	$contacts_page = 1;
 	include_once ("top.tpl");
 ?>
+<!-- Google Code for &#1087;&#1086;&#1089;&#1077;&#1097;&#1077;&#1085;&#1080;&#1077; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099; &#1082;&#1086;&#1085;&#1090;&#1072;&#1082;&#1090;&#1099; Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1038736007;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "idv0CNj-nHUQh7Wn7wM";
+var google_conversion_value = 1.00;
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1038736007/?value=1.00&amp;currency_code=USD&amp;label=idv0CNj-nHUQh7Wn7wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
 
         <div class="clearfix"></div>
 
@@ -22,7 +43,7 @@
 					<!-- Адрес КАК ПРОЙТИ ПЕШКОМ -->
                     <div class="item cont_sw cont_sw_1" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                         <div class="title">Наш адрес:<div class="ico ico_addr"></div></div>
-                        <span itemprop="postalCode">117997</span>, <span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">ул.Вавилова, 69/75, оф. 809</span>
+                        <span itemprop="postalCode">117997</span>, <span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">ул.Вавилова, 69/75 </span>
                     </div>
 
                     <!-- Адрес КАК ПРОЕХАТЬ НА МАШИНЕ -->
@@ -34,7 +55,7 @@
                     <div class="item">
                         <div class="title">Часы работы:<div class="ico ico_time"></div></div>
                         <time itemprop="openingHours" datetime="Mo-Sa 09:30-19:00, Su 09:30-18:00">Понедельник - суббота: с 9.30 до 19.00<br>
-                        Воскресенье: с 10.00 до 18.00</time>
+                        </time>
                     </div>
 
                     <div class="item">
@@ -45,7 +66,6 @@
                     <div class="item">
                         <div class="title">Наши контакты:<div class="ico ico_phone"></div></div>
                         Многоканальный: &nbsp; <span itemprop="telephone">+7-(495)-518-91-65</span><br>
-                        Телефон/факс: &nbsp; <span itemprop="faxNumber">+7-(499)-132-49-81</span><br>
                         Мобильный Билайн: &nbsp; <span itemprop="telephone">+7-(968)-827-33-87</span>
                     </div>
 

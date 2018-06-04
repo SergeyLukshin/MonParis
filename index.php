@@ -164,7 +164,18 @@
 		{
 			$str = substr($str, 0, $pos);
 		}
-		
+
+		$pos = stripos($str, '?banner-test-tags=');
+		if($pos === 0)
+		{
+			$page_no_found = false;
+			continue;			
+		}
+		if ($pos > 0)
+		{
+			$str = substr($str, 0, $pos);
+		}
+
 		
 		if ($index === 0) // первый элемент всегда пуская строка
 		{

@@ -12,7 +12,7 @@
 
         <div class="clearfix"></div>
 
-        <ul class="breadcrambs cat_bread">
+        <ul class="breadcrambs cat_bread">			
 			<li><a href="/">Главная</a></li>
 <?php
 			echo "<li><a href=\"/catalog/all\">Каталог</a></li>";
@@ -30,15 +30,12 @@
 				}
 			}
 			echo "<li>".$product_name."</li>";
-			
-			echo "<a class='filtr_clear' href='".$href."'><span>Назад к списку товаров</span></a>";
-
 ?>
-            <!--<li><a href="/">Главная</a></li>
-            <li>Карточка товара</li>-->
         </ul>
+<?php			
+	echo "<div class='container' style='position:relative; width:100%; height: 25px;float:left;'><a class='return_back' href='".$href."'><span>Назад к списку товаров</span></a></div>";
+?>
     </div>
-
     <div class="gd_view_out">
         <div class="container">			
             <div class="gd_im">

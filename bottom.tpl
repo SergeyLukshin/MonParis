@@ -17,7 +17,7 @@
                             <a class="tw" href="#"></a>
                             <a class="gp" href="#"></a>
                             <a class="in" href="#"></a>
-                            <a class="fb" href="#"></a>
+                            <a class="fb" href="http://facebook.com/moscowtradeoffice"></a>
                         </div>
                     </div>
                     <div class="col_1_k">
@@ -37,7 +37,7 @@
                     <div class="col_1_t">
                         <div class="title">Часы работы:</div>
                         <time itemprop="openingHours" datetime="Mo-Sa 09:30-19:00, Su 09:30-18:00">Понедельник - суббота: с 9.30 до 19.00<br>
-                        Воскресенье: с 9.30 до 18.00</time>
+                        Воскресенье: выходной</time>
                     </div>
                 </div>
             </div>
@@ -534,6 +534,13 @@ END2;
             });
             
 </script>
+
+<script>
+	$( "#clothers" ).click(function( event ) {
+		event.preventDefault();
+	});
+</script>
+
 <?php
 	if ($detail != 0 || $basket != 0)
 	{

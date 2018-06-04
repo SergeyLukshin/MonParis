@@ -1976,7 +1976,7 @@ body > .sub-menu li a:hover, body > .sub-menu li:hover > a {
 .breadcrambs li {
     position: relative;
     float: left;
-    margin: 0 0 0 10px;
+    margin: 5px 5px 0 10px;
     padding: 0 0 0 10px;
 }
 
@@ -6919,7 +6919,7 @@ overflow: hidden;
 
 .breadcrambs.cat_bread {
     position: relative;
-    padding-right: 140px;
+    /*padding-right: 140px;*/
 }
 
 .cat_bread .filtr_clear {
@@ -6945,6 +6945,32 @@ overflow: hidden;
 }
 
 .cat_bread .filtr_clear:hover span {
+    text-decoration: none;
+}
+
+.return_back {
+    position: absolute;
+    display: block;
+    right: 0;
+    top: 0;
+    height: 33px;
+    /*background-color: #99FF33;*/
+    text-decoration: none;
+    border: none;
+    /*padding: 8px 23px 0 12px;
+    background: url(../img/tabsize_close.png) no-repeat right 10px top 5px center;*/
+}
+
+.return_back span {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #504e4e;
+    line-height: 1.2;
+    text-decoration: underline;
+}
+
+.return_back:hover span {
     text-decoration: none;
 }
 

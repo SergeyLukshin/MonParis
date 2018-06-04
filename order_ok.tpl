@@ -7,6 +7,9 @@
 
 		$curr = "руб.";
 		if (User::getPriceInEuro() == "1") $curr = "у.е.";
+		
+		$commission = $order_cost * 4 / 100;
+		$delivery_cost = 0;
 ?>
 
 <div class="cart_list_out">
@@ -42,11 +45,12 @@
 							{
 								if (User::getPriceInEuro() == "1")
 								{
-									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 350 руб.";
+									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.";
 								}
 								else
 								{
-									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 350 руб. = ".number_format($order_cost + 350, 0, '.', '')." ".$curr;
+									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($order_cost + 400, 0, '.', '')." ".$curr;
+									$delivery_cost = 400;
 								}
 							}
 							if ($order_delivery_type == 2) 
@@ -71,6 +75,14 @@
 				if (User::getPriceInEuro() != "1")
 				{
 					echo "<br><br>Если Вы хотите оплатить Ваш заказ online, нажмите на кнопку \"Оплатить\"<br>";
+					echo "<br><table><tr>";
+					echo "	<td>Комиссия</td>";
+					echo "	<td><strong>".number_format($commission, 0, '.', '')." ".$curr."</strong></td>";
+					echo "</tr>";
+					echo "<tr>";
+					echo "	<td>Итого с учетом комиссии</td>";
+					echo "	<td><strong><span id='itog'>".number_format($order_cost + $delivery_cost + $commission, 0, '.', '')."</span> ".$curr."</strong></td>";
+					echo "</tr></table><br>";
 					include_once ("yandex_money.tpl");
 				}
 ?>

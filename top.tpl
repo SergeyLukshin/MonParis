@@ -79,7 +79,7 @@
 		}
 	}
 ?>
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style.css?2" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -91,12 +91,13 @@
     <![endif]-->
 
 
-<script>
+
+<!--  <script>
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-
+7
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -106,6 +107,19 @@ ga('create', 'UA-75150789-1', 'auto');
 ga('send', 'pageview');
 setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 
+</script>
+------------>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9896675-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9896675-4');
 </script>
 
 
@@ -193,7 +207,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                                 <div class="work_h">
                                     <h6>Часы работы</h6>
                                     <time itemprop="openingHours" datetime="Mo-Sa 09:30-19:00, Su 09:30-18:00">Понедельник - суббота: с 9.30 до 19.00<br>
-                                    Воскресенье: с 9.30 до 18.00</time>
+                                    Воскресенье: выходной</time>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +255,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                 <nav>
                     <ul class="menu">
                         <li><a <?php if ($main == 1) echo "class='act'"; ?> href="/"><span>Главная</span></a></li><li><span></span>
-                            <a <?php if ($catalog == 1 && $bigsizes != 1 && $new_col_list != 1) echo "class='act'"; ?> href="/catalog/all"><span>Одежда</span></a>
+                            <a <?php if ($catalog == 1 && $bigsizes != 1 && $new_col_list != 1) echo "class='act'"; ?> id='clothers' href="/catalog/all"><span>Одежда</span></a>
                                 <ul class="sub-menu">
 <?php
 									reset($vec_category);																	
@@ -279,5 +293,31 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                 </div>
             </div>
         </div>
+
+<?php
+	if ($detail <> 1)  echo <<< END
+	
+<div class='content-wrapper' style='padding: 0 20px'>
+	<div class='content'>
+		<form action='https://lk.mailopost.ru/subscriptions/emyasaeptf56oalkm/form' charset='UTF-8' method='post'>
+			<div class='form-group'>
+				<label class="required" for="email">Email</label>
+				<input type="text" name="recipient[email]" id="recipient_email" value="" required="required" class="form-control" />
+			</div>
+			<div class='form-group row'>
+				<div class='col-xs-12 col-sm-4'></div>
+				<div class='col-xs-12 col-sm-8 text-right'>
+					<button class='btn btn-success' type='submit'>
+						<i class='fi fi-return'></i>
+						<span>Подписаться на новости и акции.</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+END
+?>
+
         
         <!-- top -->
