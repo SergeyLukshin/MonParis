@@ -63,6 +63,7 @@
 		exit();
 	}	
 	
+
 	if($request_URI === "/catalog") // переадресация http://mon-paris.ru/catalog на http://mon-paris.ru/catalog/all
 	{
 		$bodytag = "/catalog/all";

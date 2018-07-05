@@ -122,9 +122,9 @@
         </div>
 <?php
 
-	if (file_exists("catalog/new_collections.tpl"))
+	if (file_exists("catalog_descr/new_collections.tpl"))
 	{
-		include "catalog/new_collections.tpl";
+		include "catalog_descr/new_collections.tpl";
 	}
 
 	include_once ("bottom.tpl");

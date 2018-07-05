@@ -386,9 +386,9 @@
 						{
 							if ($category != "")
 							{	
-								if (file_exists("catalog/".$category.".tpl"))
+								if (file_exists("catalog_descr/".$category.".tpl"))
 								{
-									include "catalog/".$category.".tpl";
+									include "catalog_descr/".$category.".tpl";
 									$bFind = 1;
 								}
 							}
@@ -396,9 +396,9 @@
 							{
 								if ($bigsizes != 0)
 								{
-									if (file_exists("catalog/bolshie-razmery.tpl"))
+									if (file_exists("catalog_descr/bolshie-razmery.tpl"))
 									{
-										include "catalog/bolshie-razmery.tpl";
+										include "catalog_descr/bolshie-razmery.tpl";
 										$bFind = 1;
 									}
 								}

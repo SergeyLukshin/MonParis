@@ -66,9 +66,9 @@
 
 <?php
 
-	if (file_exists("catalog/opt.tpl"))
+	if (file_exists("catalog_descr/opt.tpl"))
 	{
-		include "catalog/opt.tpl";
+		include "catalog_descr/opt.tpl";
 	}
 
 	include_once ("bottom.tpl");
