@@ -326,7 +326,7 @@
 						
 							echo "<div class='item'><div class='gd_it'>";
 							if ($small_path != "")
-								echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."' style='background-image: url(http://mon-paris.ru/goods_images/".$small_path.");'></a>";
+								echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."' style='background-image: url(/goods_images/".$small_path.");'></a>";
 							else
 								echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."'></a>";
 							echo "	<div class='inf'>";

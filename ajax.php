@@ -16,9 +16,44 @@ class AuthorizationAjaxRequest extends AjaxRequest
         "logout" => "logout",
         "register" => "register",
         "message" => "message",
+        //"pay" => "pay",
         //"make_order" => "make_order",
     );
     
+    /*public function pay()
+    {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            // Method Not Allowed
+            http_response_code(405);
+            header("Allow: POST");
+            $this->setFieldError("main", "Method Not Allowed");
+            return;
+        }
+        
+        $shopId = $this->getRequestParam("shopId");
+		$scid = $this->getRequestParam("scid");
+		$cps_phone = $this->getRequestParam("cps_phone");
+		$customerNumber = $this->getRequestParam("customerNumber");
+		$paymentType = $this->getRequestParam("paymentType");
+		$custName = $this->getRequestParam("custName");
+		$custEmail = $this->getRequestParam("custEmail");
+		$orderNumber = $this->getRequestParam("orderNumber");
+		$sum = $this->getRequestParam("sum");
+
+		if (empty($orderNumber)) {
+			$this->setFieldError("orderNumber", "Укажите номер заказа");
+			return;
+		}
+
+		if (empty($sum)) {
+			$this->setFieldError("sum", "Укажите сумму доставки");
+			return;
+		}
+
+		$this->status = "ok";
+        $this->setResponse("redirect", "https://money.yandex.ru/eshop.xml");
+	}*/
+	
     public function message()
     {
         if ($_SERVER["REQUEST_METHOD"] !== "POST") {

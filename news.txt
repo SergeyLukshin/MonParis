@@ -17,19 +17,29 @@
 
 			<div class="row">
 				<div class = "col-md-6 col-sm-12">
-							<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO & UGO ">
-							<font color='blue' size=4 > <b>Получена новая весенне-летняя коллекция Leo Guy (Leo & Ugo) </b></font> </a> <br> 
+							<a href="https://mon-paris.ru/catalog/FLORENCE-MODE-zima-2019" TITLE="В КАТАЛОГ FLORENCE-MODE"> 
+							<!--  <font color='red' size=4 > В связи с обновлением электросети наш  <br> <b>офис будет закрыт в субботу 10 ноября.</b> <br> 
+                                                                                   Приносим извинения за доставленные неудобства.  </b> </font> </a> <br> 
+							-->
 
-							<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO & UGO ">
-							<font color='blue' size=4 > <b>Перейти в каталог Elisa Fanti </b></font> <br></a> </font> <br>
+
+							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
+							<font color='darkblue' size=2 > <u></u>Распродажа Giani Forte. Рождественское чудо от Mon Paris </font> <br></a> </font>
+							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
+							<font color='darkblue' size=2 > <u></u>Максимальная скидка 93%! Заполняйте корзину по старым ценам. <br> Но оплачиваете по </font> </a> </font> 
+							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
+							<font color='darkred' size=2 >1000 РУБЛЕЙ ЗА ЛЮБУЮ МОДЕЛЬ <br>
+							Независимо от старых цен на сайте. </b></font> <br></a> </font> 
+	
 				</div>
 				<div class = "col-md-6 col-sm-12">
-											
-						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GU">		<img src="http://mon-paris.ru/goods_images/15958_1.jpg"   height='150'></a>
-						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/15967_1.jpg"   height='150'></a>
-						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/15975_1.jpg"   height='150'></a>
-						<a href="http://mon-paris.ru/catalog/LEO-GUY-leto-2018" TITLE="В КАТАЛОГ LEO GUY"> 		<img src="http://mon-paris.ru/goods_images/16029_1.jpg"   height='150'></a>
-
+						<a href="https://mon-paris.ru/catalog/platya/plate-j716-4427" TITLE="Смотреть эту модель подробнее">		<img src="https://mon-paris.ru/goods_images/4427_1.jpg"   height='120'></a>
+           					<a href="https://mon-paris.ru/catalog/pidzhaki/pidzhak-e403-4276" TITLE="Смотреть эту модель подробнееd"> 	<img src="https://mon-paris.ru/goods_images/4276_1.jpg"   height='120'></a>
+			     			<a href="https://mon-paris.ru/catalog/yubki/yubka-b301-3824" TITLE="Смотреть эту модель подробнее">		<img src="https://mon-paris.ru/goods_images/3824_1.jpg"   height='120'></a>
+						<a href="https://mon-paris.ru/catalog/bluzki/bluzka-setka-p302-4571"Смотреть эту модель подробнее"> 	<img src="https://mon-paris.ru/goods_images/4571_1.jpg"   height='120'></a>
+						<a href="https://mon-paris.ru/catalog/bluzki/rubashka-c623-4102" TITLE="Смотреть эту модель подробнее"> 	<img src="https://mon-paris.ru/goods_images/4102_1.jpg"   height='120'></a>
+						<a href="https://mon-paris.ru/catalog/platya/plate-j062-6600" TITLE="Смотреть эту модель подробнее"> 		<img src="https://mon-paris.ru/goods_images/6600_1.jpg"   height='120'></a>
+				
 				</div>
 			</div>
 			<div class="row">

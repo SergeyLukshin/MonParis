@@ -32,8 +32,10 @@
 	echo "<input type=\"hidden\" name=\"cps_phone\" value=\"".$user_tel."\">";
 	echo "<input type=\"hidden\" name=\"customerNumber\" value=\"".$user_email."\">";
 	echo "<input id=\"delivery_cost\" style=\"margin: 10px;width: 122px; display:none;\" value=\"".$delivery_cost."\" onchange='updateCost(\"delivery_cost\", \"old_sum\", \"sum\")'>";
-	echo "<input id = \"sum\" name=\"sum\" type=\"hidden\" value=\"".number_format($order_cost + $delivery_cost + $commission, 0, '.', '')."\">";
-	echo "<input id=\"old_sum\" type=\"hidden\" value=\"".number_format($order_cost + $commission, 0, '.', '')."\">";
+	echo "<input id = \"sum\" name=\"sum\" type=\"hidden\" value=\"".number_format($order_cost + $delivery_cost, 0, '.', '')."\">";
+	echo "<input id=\"old_sum\" type=\"hidden\" value=\"".number_format($order_cost, 0, '.', '')."\">";
+	//echo "<input id = \"sum\" name=\"sum\" type=\"hidden\" value=\"".number_format($order_cost + $delivery_cost + $commission, 0, '.', '')."\">";
+	//echo "<input id=\"old_sum\" type=\"hidden\" value=\"".number_format($order_cost + $commission, 0, '.', '')."\">";
 	echo "<input name=\"paymentType\" value=\"\" type=\"hidden\"/>";
 	echo "<input type=\"hidden\" name=\"orderNumber\" value=\"".$order_number."\">";
 	echo "<input type=\"hidden\" name=\"custName\" value=\"".$user_fio."\">";

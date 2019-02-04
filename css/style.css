@@ -619,7 +619,38 @@ td {
     background: url(../img/ico_top_phone.png) no-repeat 9px center;
 }
 
+.cart_div {
+	margin-bottom: 8px !important;
+}
+
 .header_inn .phone > div > div {
+    float: left;
+    width: 100%;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #737373;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+}
+
+.header_inn .phone2 {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin: 0 0 3px 0;
+    background: url(../img/bg_grey_1.png) repeat 0 0;
+}
+
+.header_inn .phone2 > div {
+    float: left;
+    width: 100%;
+    margin: 0 0 0 0;
+    padding: 9px 0 7px 26px;
+    background: url(../img/ico_top_whatsapp.png) no-repeat 5px center;
+}
+
+.header_inn .phone2 > div > div {
     float: left;
     width: 100%;
     font-family: 'PT Sans', sans-serif;
@@ -2415,6 +2446,18 @@ body > .sub-menu li a:hover, body > .sub-menu li:hover > a {
     margin-right: 40px;
 }
 
+.vacancy .txt {
+    float: left;
+    clear: both;
+    width: 100%;
+    min-height: 405px;
+    margin: 0 0 0 0;
+    padding: 0 310px 0 0;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    color: #737373;
+    line-height: 1.3;
+}
 
 .opt_out {
     float: left;

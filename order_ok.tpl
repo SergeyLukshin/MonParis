@@ -36,7 +36,7 @@
 					</tr>
 					<tr>
 						<td>Дата заказа</td>
-						<td><strong><?php echo date("m.d.Y") ?></strong></td>
+						<td><strong><?php echo date("d.m.Y") ?></strong></td>
 					</tr>
 					<tr>
 						<td>Стоимость</td>
@@ -76,12 +76,14 @@
 				{
 					echo "<br><br>Если Вы хотите оплатить Ваш заказ online, нажмите на кнопку \"Оплатить\"<br>";
 					echo "<br><table><tr>";
-					echo "	<td>Комиссия</td>";
-					echo "	<td><strong>".number_format($commission, 0, '.', '')." ".$curr."</strong></td>";
-					echo "</tr>";
-					echo "<tr>";
-					echo "	<td>Итого с учетом комиссии</td>";
-					echo "	<td><strong><span id='itog'>".number_format($order_cost + $delivery_cost + $commission, 0, '.', '')."</span> ".$curr."</strong></td>";
+					//echo "	<td>Комиссия</td>";
+					//echo "	<td><strong>".number_format($commission, 0, '.', '')." ".$curr."</strong></td>";
+					//echo "</tr>";
+					//echo "<tr>";
+					echo "	<td>Итого</td>";
+					echo "	<td><strong><span id='itog'>".number_format($order_cost + $delivery_cost, 0, '.', '')."</span> ".$curr."</strong></td>";
+					//echo "	<td>Итого с учетом комиссии</td>";
+					//echo "	<td><strong><span id='itog'>".number_format($order_cost + $delivery_cost + $commission, 0, '.', '')."</span> ".$curr."</strong></td>";
 					echo "</tr></table><br>";
 					include_once ("yandex_money.tpl");
 				}

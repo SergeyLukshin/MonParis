@@ -50,16 +50,16 @@
 						//if ($productID == 'perchatki-kozhanye-julie-10945')
 						//	echo "<table><tr><td><div class='pro360'><img src='http://mon-paris.ru/1000px/001.jpg' alt=''></div></td></tr></table>";
 						//else
-							echo "<table><tr><td><img src='http://mon-paris.ru/goods_images/".$product_image_path."' alt=''></td></tr></table>";
+							echo "<table><tr><td><img src='/goods_images/".$product_image_path."' alt=''></td></tr></table>";
 					}
 
 					//if ($productID != 'perchatki-kozhanye-julie-10945') {
 						echo "<div class='im_list'>";
-							echo "<a rel='gd_fansy' class='fancybox item act' href='http://mon-paris.ru/goods_images/".$product_image_path."' style='background-image: url(http://mon-paris.ru/goods_images/".$product_image_path.");'><div></div></a>";
+							echo "<a rel='gd_fansy' class='fancybox item act' href='/goods_images/".$product_image_path."' style='background-image: url(/goods_images/".$product_image_path.");'><div></div></a>";
 							reset($vec_product_images);																	
 							foreach ($vec_product_images as $key => $value) 
 							{
-								echo "<a rel='gd_fansy' class='fancybox item' href='http://mon-paris.ru/goods_images/".$key."' style='background-image: url(http://mon-paris.ru/goods_images/".$key.");'><div></div></a>";
+								echo "<a rel='gd_fansy' class='fancybox item' href='/goods_images/".$key."' style='background-image: url(/goods_images/".$key.");'><div></div></a>";
 							}
 						echo "</div>";
 					//}
@@ -74,7 +74,7 @@
                     <div class="gd_fansy_out">
 <?php
 					if ($product_image_path != "")
-                        echo "<a class='fancybox gd_fansy' rel='gd_fansy' href='http://mon-paris.ru/goods_images/".$product_image_path."'></a>";
+                        echo "<a class='fancybox gd_fansy' rel='gd_fansy' href='/goods_images/".$product_image_path."'></a>";
 ?>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
 
     <meta name="description" content="<?php echo $strDescription; ?>">
     <title><?php echo $strTitle; ?></title>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-select.css" rel="stylesheet">
     <link href="/js/flexslider2/flexslider.css" rel="stylesheet" />
@@ -75,7 +75,7 @@
 	{
 		if (!isset($_SESSION['cur_page']) || $_SESSION['cur_page'] != "0")
 		{
-			echo "<link rel=\"canonical\" href=\"http://mon-paris.ru/".$url_str."\"/>";
+			echo "<link rel=\"canonical\" href=\"/".$url_str."\"/>";
 		}
 	}
 ?>
@@ -154,6 +154,31 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 <noscript><div><img src="https://mc.yandex.ru/watch/17423986" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
+
+
+<!-- Global site tag (gtag.js) - Google Ads: 1038736007 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1038736007"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-1038736007');
+</script>
+
+<script>
+  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
+    'phone_conversion_number': '+7(495)-518-91-65'
+  });
+</script>
+
+<script>
+  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
+    'phone_conversion_number': '+7-(968)-827-33-87'
+  });
+</script>
+
+
 </head>
 
 
@@ -166,7 +191,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
             <div class="reg_ent">
 <?php
 				if (!User::isAuthorized())
-				{
+					{
 					echo "<div class='lnk'><a href='#' data-toggle='modal' data-target='#modal_reg'>Регистрация</a></div>";
 					echo "<div class='rz'></div>";
 					echo "<div class='lnk'><a href='#' data-toggle='modal' data-target='#modal_ent'>Вход</a></div>";
@@ -182,24 +207,30 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 
             <div class="header_inn">
                 <div class="clearfix"><a class="logo" href="/"></a></div>
-                <div class="header_inn_cols" itemscope itemtype="http://schema.org/LocalBusiness">
+                <div class="header_inn_cols" itemscope itemtype="https://schema.org/LocalBusiness">
 					<span itemprop="name" style="display:none;">Mon-Paris.ru</span>
 					
-					<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+					<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                         <span itemprop="postalCode" style="display:none;">117997</span><span itemprop="addressLocality" style="display:none;">Москва</span><span itemprop="streetAddress" style="display:none;">ул.Вавилова, 69/75, оф. 809</span>
                     </div>
                     
                     <div class="header_inn_cols_2">
-                        <div class="hcols hcols_1">
+						<div class="hcols hcols_1">
                             <div>
                                 <div><a class="hd_tp_butt" href="/samovyvoz.php"><span class="ico_zabrat">Забрать в магазине</span></a></div>
                                 <div><a class="hd_tp_butt" href="/delivery.php"><span class="ico_besp_deliv">Доставка</span></a></div>
+                                <div><a class="hd_tp_butt tp_recall" href="#"  data-toggle="modal" data-target="#modal_feedback_1"><span>Перезвоните мне</span></a></div>
                             </div>
                         </div>
                         <div class="hcols hcols_2">
                             <div>
-                                <div class="phone"><div><div><span itemprop="telephone">+7(495)-518-91-65</span></div></div></div>
-                                <div><a class="hd_tp_butt tp_recall" href="#" data-toggle="modal" data-target="#modal_feedback_1"><span>Перезвоните мне</span></a></div>
+                                <div class="phone visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="tel:+74955189165">+7(495)-518-91-65</a></span></div></div></div>
+                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387">+7(968)-827-33-87</a></span></div></div></div>
+                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387">+7(968)-827-33-87</a></span></div></div></div>
+                                <div class="phone visible-md visible-lg"><div><div><span itemprop="telephone">+7(495)-518-91-65</span></div></div></div>
+                                <div class="phone2 visible-md visible-lg"><div><div><span itemprop="telephone">+7(968)-827-33-87</span></div></div></div>
+                                <div class="phone2 visible-md visible-lg"><div><div><span itemprop="telephone">+7(968)-827-33-87</span></div></div></div>
+                                <!--<div><a class="hd_tp_butt tp_recall" href="#" data-toggle="modal" data-target="#modal_feedback_1"><span>Перезвоните мне</span></a></div>-->
                             </div>
                         </div>
                         <div class="hcols hcols_3">
@@ -213,7 +244,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                         </div>
                     </div>
                     <div class="hcols hcols_4">
-                        <div>
+                        <div class = "cart_div">
                             <a href="/cart.php" class="cart_top">
                                 <h6>Корзина</h6>
                                 <div class="inf" id='jcart2'>
@@ -223,11 +254,13 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                                 </div>
                             </a>
                         </div>
+                        <div><a class="hd_tp_butt tp_recall" href="#" data-toggle="modal" data-target="#modal_feedback_2"><span>Оплатить доставку</span></a></div>
                     </div>
                     <div class="hcols hcols_5">
                         <div>
                             <div class="search_tp">
                                 <div class="search_inp">
+
 									<form name="search_form" action="/catalog/search" method="POST" enctype="multipart/form-data">
 <?php
 										if ($search != 0)
@@ -266,10 +299,11 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 ?>
                                 </ul></li><li><span></span>
                             <a <?php if ($catalog == 1 && $bigsizes == 1) echo "class='act'"; ?> href="/catalog/bolshie-razmery"><span>Большие размеры</span></a></li><li><span></span>
-                            <a <?php if ($new_collection_page == 1 || $catalog == 1 && $new_col_list == 1) echo "class='act'"; ?> href="/new_collections.php"><span>Новые коллекции и Акции</span></a></li><li><span></span>
+                            <a <?php if ($new_collection_page == 1 || $catalog == 1 && $new_col_list == 1) echo "class='act'"; ?> href="/new_collections.php"><span>Новые коллекции</span></a></li><li><span></span>
                             <a <?php if ($brends_page == 1) echo "class='act'"; ?> href="/brends.php"><span>Все бренды</span></a></li><li><span></span>
                             <a <?php if ($opt_page == 1) echo "class='act'"; ?> href="/opt.php"><span>Оптовым покупателям</span></a></li><li><span></span>
-                            <a <?php if ($contacts_page == 1) echo "class='act'"; ?> href="/contacts.php"><span>Контакты</span></a></li>
+                            <a <?php if ($contacts_page == 1) echo "class='act'"; ?> href="/contacts.php"><span>Контакты</span></a></li><li><span></span>
+                            <a <?php if ($vacancy_page == 1) echo "class='act'"; ?> href="/vacancy.php"><span>Вакансии</span></a></li><li><span></span>
                     </ul>
                 </nav>
             </div>
@@ -296,7 +330,8 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 
 <?php
 	if ($detail <> 1)  echo <<< END
-	
+
+<!---	
 <div class='content-wrapper' style='padding: 0 20px'>
 	<div class='content'>
 		<form action='https://lk.mailopost.ru/subscriptions/emyasaeptf56oalkm/form' charset='UTF-8' method='post'>
@@ -316,6 +351,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 		</form>
 	</div>
 </div>
+--->
 END
 ?>
 

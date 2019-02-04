@@ -2,6 +2,9 @@ Options +FollowSymLinks
 
 RewriteEngine On
 
+RewriteCond %{HTTP:PORT} !^443$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+
 <IfModule mod_headers.c>
 	<FilesMatch "\.(js|css)$">
 	  Header set Cache-Control "max-age=2592000"

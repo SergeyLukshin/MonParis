@@ -7,7 +7,7 @@
 
 <div class="footer">
     <div class="container">
-        <div class="footer_inn" itemscope itemtype="http://schema.org/LocalBusiness">
+        <div class="footer_inn" itemscope itemtype="https://schema.org/LocalBusiness">
 			<span itemprop="name" style="display:none;">Mon-Paris.ru</span>
             <div class="col_12">
                 <div class="cols col_1">
@@ -17,7 +17,7 @@
                             <a class="tw" href="#"></a>
                             <a class="gp" href="#"></a>
                             <a class="in" href="#"></a>
-                            <a class="fb" href="http://facebook.com/moscowtradeoffice"></a>
+                            <a class="fb" href="https://facebook.com/moscowtradeoffice"></a>
                         </div>
                     </div>
                     <div class="col_1_k">
@@ -30,7 +30,7 @@
                 <div class="clearfix clear_cols"></div>
                 <div class="clearfix clear_cols"></div>
                 <div class="cols col_2">
-                    <div class="col_1_a"  itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <div class="col_1_a"  itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                         <div class="title">Наши адреса:</div>
                         <span itemprop="postalCode">117997</span>, <span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">ул.Вавилова, 69/75, оф. 809</span>
                     </div>
@@ -50,7 +50,45 @@
     </div>
 </div>
 
+<div id="modal_feedback_2" class="modal modal_feedback" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <a class="closew" data-dismiss="modal" href="#"></a>
 
+                <h2>ОПЛАТИТЬ ДОСТАВКУ</h2>
+
+                <div class="clearfix"></div>
+
+				<form id="pay" method="POST" action="https://money.yandex.ru/eshop.xml" target="_blank">
+				<!--<form class="form-signin ajax" method="post" action="/ajax.php">-->
+					<div class="main-error alert alert-danger hidden"></div>
+<?php
+					echo "<input type=\"hidden\" name=\"shopId\" value=\"75687\">";
+					echo "<input type=\"hidden\" name=\"scid\" value=\"70538\">";
+					echo "<input type=\"hidden\" name=\"cps_phone\" value=\"".User::getUserPhone()."\">";
+					echo "<input type=\"hidden\" name=\"customerNumber\" value=\"".User::getUserLogin()."\">";
+					echo "<input name=\"paymentType\" value=\"\" type=\"hidden\"/>";
+					echo "<input type=\"hidden\" name=\"custName\" value=\"".User::getUserName()."\">";
+					echo "<input type=\"hidden\" name=\"custEmail\" value=\"".User::getUserLogin()."\">";
+?>
+					<div class="form-group">
+						<input type="text" class="form-control" name="orderNumber" id="orderNumber" placeholder="Номер заказа" maxlength="10">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" name="sum" id="sum" placeholder="Стоимость доставки"  maxlength="10">
+					</div>
+
+					<input type="hidden" name="act" value="pay">
+					<button class="form_butt_2" id="pay_btn" name="" form="pay" value="send_form"><span>оплатить</span></button>
+
+					<div class="clearfix"></div>
+				</form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="modal_feedback_1" class="modal modal_feedback" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -162,16 +200,17 @@
 									<option value="Вологодская область">Вологодская область</option>
 									<option value="Воронежская область">Воронежская область</option>
 									<option value="Дагестан респ.">Дагестан респ.</option>
-									<option value="Еврейская авт. область">Еврейская авт. область</option>
+									<option value="Еврейская автономная область">Еврейская автономная область</option>
+									<option value="Забайкальский край">Забайкальский край</option>
 									<option value="Ивановская область">Ивановская область</option>
 									<option value="Ингушетия респ.">Ингушетия респ.</option>
 									<option value="Иркутская область">Иркутская область</option>
-									<option value="Кабардино-Балкарская респ.">Кабардино-Балкарская респ.</option>
+									<option value="Кабардино-Балкарская Республика">Кабардино-Балкарская Республика</option>
 									<option value="Калининградская область">Калининградская область</option>
 									<option value="Калмыкия респ.">Калмыкия респ.</option>
 									<option value="Калужская область">Калужская область</option>
-									<option value="Камчатская область">Камчатская область</option>
-									<option value="Карачаево-Черкесская респ.">Карачаево-Черкесская респ.</option>
+									<option value="Камчатский край">Камчатский край</option>
+									<option value="Карачаево-Черкесская Республика">Карачаево-Черкесская Республика</option>
 									<option value="Карелия респ.">Карелия респ.</option>
 									<option value="Кемеровская область">Кемеровская область</option>
 									<option value="Кировская область">Кировская область</option>
@@ -179,6 +218,7 @@
 									<option value="Костромская область">Костромская область</option>
 									<option value="Краснодарский край">Краснодарский край</option>
 									<option value="Красноярский край">Красноярский край</option>
+									<option value="Крым респ.">Крым респ.</option>
 									<option value="Курганская область">Курганская область</option>
 									<option value="Курская область">Курская область</option>
 									<option value="Ленинградская область">Ленинградская область</option>
@@ -187,6 +227,7 @@
 									<option value="Марий Эл респ.">Марий Эл респ.</option>
 									<option value="Мордовия респ.">Мордовия респ.</option>
 									<option value="Мурманская область">Мурманская область</option>
+									<option value="Ненецкий автономный округ">Ненецкий автономный округ</option>
 									<option value="Нижегородская область">Нижегородская область</option>
 									<option value="Новгородская область">Новгородская область</option>
 									<option value="Новосибирская область">Новосибирская область</option>
@@ -197,7 +238,6 @@
 									<option value="Пермский край">Пермский край</option>
 									<option value="Приморский край">Приморский край</option>
 									<option value="Псковская область">Псковская область</option>
-									<option value="Респ. Казахстан">Респ. Казахстан</option>
 									<option value="Ростовская область">Ростовская область</option>
 									<option value="Рязанская область">Рязанская область</option>
 									<option value="Самарская область">Самарская область</option>
@@ -206,7 +246,8 @@
 									<option value="Саха (Якутия) респ.">Саха (Якутия) респ.</option>
 									<option value="Сахалинская область">Сахалинская область</option>
 									<option value="Свердловская область">Свердловская область</option>
-									<option value="Северная Осетия-Алания респ.">Северная Осетия-Алания респ.</option>
+									<option value="Севастополь">Севастополь</option>
+									<option value="Северная Осетия - Алания респ.">Северная Осетия - Алания респ.</option>
 									<option value="Смоленская область">Смоленская область</option>
 									<option value="Ставропольский край">Ставропольский край</option>
 									<option value="Тамбовская область">Тамбовская область</option>
@@ -220,13 +261,13 @@
 									<option value="Ульяновская область">Ульяновская область</option>
 									<option value="Хабаровский край">Хабаровский край</option>
 									<option value="Хакасия респ.">Хакасия респ.</option>
+									<option value="Ханты-Мансийский автономный округ - Югра">Ханты-Мансийский автономный округ - Югра</option>
 									<option value="Челябинская область">Челябинская область</option>
 									<option value="Чеченская респ.">Чеченская респ.</option>
-									<option value="Читинская область">Читинская область</option>
 									<option value="Чувашская респ.">Чувашская респ.</option>
-									<option value="Чукотский авт. окр.">Чукотский авт. окр.</option>
+									<option value="Чукотский автономный округ">Чукотский автономный округ</option>
+									<option value="Ямало-Ненецкий автономный округ">Ямало-Ненецкий автономный округ</option>
 									<option value="Ярославская область">Ярославская область</option>
-									<option value="Ямало-Ненецкий АО">Ямало-Ненецкий АО</option>
 							</select>
 						</div>
 
@@ -461,7 +502,7 @@ END_NEWS;
 ================================================== -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-select.js"></script>
 <script src="/js/flexslider2/jquery.flexslider.js"></script>
@@ -483,6 +524,51 @@ END2;
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 <script src="/js/maskedinput-1.2.2.min.js" type="text/javascript"></script>
 <script>
+			function isNumeric(value) {
+				return /^-{0,1}\d+$/.test(value);
+			}
+
+			$('#pay_btn').on('click', function(event) {
+				event.preventDefault();
+				
+				var orderNumber = $('#orderNumber');
+				var orderSum = $('#sum');
+				var form = $('form#pay');
+
+				if (!$.trim(orderNumber.val()) || !isNumeric(orderNumber.val())) {
+					
+					var $mainErrorContainer = form.find('.main-error');
+					if ($mainErrorContainer.hasClass('hidden')) {
+						$mainErrorContainer.removeClass('hidden');
+					}
+                    $mainErrorContainer.html("Укажите номер заказа").show();
+                    $('#modal_feedback_2').scrollTop(0);
+                    
+					orderNumber.focus();
+					$mainErrorContainer.fadeOut(3000);
+					
+					return;
+				}
+				
+				if (!$.trim(orderSum.val()) || !isNumeric(orderSum.val())) {
+					
+					var $mainErrorContainer = form.find('.main-error');
+					if ($mainErrorContainer.hasClass('hidden')) {
+						$mainErrorContainer.removeClass('hidden');
+					}
+                    $mainErrorContainer.html("Укажите стоимость доставки").show();
+                    $('#modal_feedback_2').scrollTop(0);
+					orderSum.focus();
+					$mainErrorContainer.fadeOut(3000);
+					
+					return;
+				}
+
+				//alert(1);
+				$(document).off('submit', 'form#pay');
+				form.submit();
+			});	
+	
             $(document).ready(function() {
 				$("#user_tel").mask("+7 (999) ?999999999");
 				$("#phone").mask("+7 (999) ?999999999");

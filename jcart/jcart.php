@@ -463,7 +463,7 @@ class jcart {
 					echo  "			<div class='lf'>";
 					echo  "				<div class='num'>".$index."</div>";
 					if ($image_path != "")
-						echo  "			<a href='/catalog/".$productLatCategoryName."/".$productID."' class='im' style='background-image: url(http://mon-paris.ru/goods_images/".$image_path.");'></a>";
+						echo  "			<a href='/catalog/".$productLatCategoryName."/".$productID."' class='im' style='background-image: url(/goods_images/".$image_path.");'></a>";
 					echo  "			</div>";
 					echo  "			<div class='rg'>";
 					echo  "				<div class='cl cl_2'>";
