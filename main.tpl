@@ -7,8 +7,8 @@
 
             <div class="item">
                 <div class="item_out">
-                 <div class="item_inn" style="background-image: url(img/_collect_1.jpg);"><a href="/catalog/ELISA-FANTI-leto-2018"> 
-						<table><tr><td>Большие размеры</td></tr></table>
+                 <div class="item_inn" style="background-image: url(img/_collect_1.jpg);"><a href="/catalog/platya">
+						<table><tr><td>ВСЕ ПЛАТЬЯ</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
                     </a>
@@ -19,8 +19,8 @@
 
             <div class="item">
                 <div class="item_out">
-                     <div class="item_inn" style="background-image: url(img/_collect_2.jpg);"><a href="/catalog/LEO-GUY-leto-2018"> 
-							<table><tr><td>Трикотаж из Франции</td></tr></table>
+                     <div class="item_inn" style="background-image: url(img/_collect_2.jpg);"><a href="/catalog/MONARI">
+							<table><tr><td>MONARI</td></tr></table>
 							<div class="optic"></div>
 							<div class="button"><button>посмотреть</button></div>
 						</a>
@@ -31,8 +31,8 @@
 
             <div class="item">
                 <div class="item_out">
-                    <div class="item_inn" style="background-image: url(img/_collect_3.jpg);"><a href="/catalog/TIZIANO-SANTANDREA-leto-2018">
-                        <table><tr><td>Женщинам</td></tr></table>
+                    <div class="item_inn" style="background-image: url(img/_collect_3.jpg);"><a href="/catalog/RABE">
+                        <table><tr><td>RABE и LUCIA</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
                     </a></div>
@@ -42,8 +42,8 @@
 
             <div class="item">
                 <div class="item_out">
-                    <div class="item_inn" style="background-image: url(img/_collect_4.jpg);"><a href="/catalog/LEO-GUY-leto-2018">
-                        <table><tr><td>Девушкам</td></tr></table>
+                    <div class="item_inn" style="background-image: url(img/_collect_4.jpg);"><a href="/catalog/LEO-GUY-leto-2019">
+                        <table><tr><td>LEO & UGO</td></tr></table>
                         <div class="optic"></div>
                         <div class="button"><button>посмотреть</button></div>
                     </a></div>
@@ -62,9 +62,9 @@
                         <li style="background-image: url(img/_top_slider_11.jpg);">
                             <div class="inn">
                                 <div class="tx">  
-                                    <img src="img/_top_slider_1_tx.png" alt=""> 
+                                    <!--<img src="img/" alt="">-->
                                  </div>
-                                <a class="more" href="/catalog/ELISA-FANTI-zima-2018">подробнее</a>
+                                <a class="more" href="/catalog/MONARI">Последние коллекции из Германии</a>
                             </div>
                         </li>
                         <li style="background-image: url(img/_top_slider_2.jpg);">
@@ -146,11 +146,11 @@
 				}
 				else
 				{
-					if (User::getPriceInEuro() == "1")
+					/*if (User::getPriceInEuro() == "1")
 					{
 						$query_product_select = $query_product_select."PriceInEuro AS OldPrice, PriceInEuro AS NewPrice ";
 					}
-					else
+					else*/
 					{
 						$query_product_select = $query_product_select."".$price_str." AS OldPrice, ".$price_discount_str." AS NewPrice ";
 					}
@@ -192,13 +192,13 @@
 					$old_price = number_format($row["OldPrice"], 0, '.', ' ');
 					$price = number_format($row["NewPrice"], 0, '.', ' ');
 					
-					if (User::getPriceInEuro() == "1")
+					/*if (User::getPriceInEuro() == "1")
 					{ 
 						$discount = 0;
 						$old_price = $old_price." у.е.";
 						$price = $price." у.е.";
 					}
-					else 
+					else */
 					{
 						$old_price = $old_price." р.";
 						$price = $price." р.";

@@ -9,7 +9,6 @@
 
 		if ($href == "") $href = "/";
 ?>
-
         <div class="clearfix"></div>
 
         <ul class="breadcrambs cat_bread">			
@@ -36,34 +35,58 @@
 	echo "<div class='container' style='position:relative; width:100%; height: 25px;float:left;'><a class='return_back' href='".$href."'><span>Назад к списку товаров</span></a></div>";
 ?>
     </div>
+
+	<!-- Yandex.Metrika -->
+	<script type="text/javascript">
+		<!--window.dataLayerYandex = window.dataLayerYandex || [];-->
+
+		dataLayer.push({
+			"ecommerce": {
+				"detail": {
+					"products": [
+						{
+							"id": "<?php echo $product_id; ?>",
+							"name" : "<?php echo $product_name; ?>",
+							"price": <?php echo $product_price; ?>,
+							"brand": "<?php echo $product_brand_name; ?>",
+							"category": "<?php echo $productCategoryName; ?>",
+						}
+					]
+				}
+			}
+		});
+	</script>
+	<!-- /Yandex.Metrika -->
+
+
     <div class="gd_view_out">
         <div class="container">			
             <div class="gd_im">
 <?php
-				//if ($productID == 'perchatki-kozhanye-julie-10945')
-				//	echo "<div class=\"gd_im_inn\" style=\"padding-left:0px;\">";
-				//else
-					echo "<div class=\"gd_im_inn\">";
-				
+
 					if ($product_image_path != "")
 					{
-						//if ($productID == 'perchatki-kozhanye-julie-10945')
-						//	echo "<table><tr><td><div class='pro360'><img src='http://mon-paris.ru/1000px/001.jpg' alt=''></div></td></tr></table>";
-						//else
-							echo "<table><tr><td><img src='/goods_images/".$product_image_path."' alt=''></td></tr></table>";
+    					echo "<div class='gd_im_inn'>";
+						echo "<table><tr><td><img src='/goods_images/".$product_image_path."' alt=''></td></tr></table>";
+
+                        echo "<div class='im_list'>";
+                            echo "<a rel='gd_fansy' class='fancybox item act' href='/goods_images/".$product_image_path."' style='background-image: url(/goods_images/".$product_image_path.");'><div></div></a>";
+                            reset($vec_product_images);
+                            foreach ($vec_product_images as $key => $value)
+                            {
+                                echo "<a rel='gd_fansy' class='fancybox item' href='/goods_images/".$key."' style='background-image: url(/goods_images/".$key.");'><div></div></a>";
+                            }
+                        echo "</div>";
+					}
+					else
+					{
+    					echo "<div class='gd_im_inn' style='padding-left:0px !important;'>";
+					    if ($product_is_new_collection != 0)
+					    {
+					        echo "<img src='/img/empty_big.png' alt=''>";
+					    }
 					}
 
-					//if ($productID != 'perchatki-kozhanye-julie-10945') {
-						echo "<div class='im_list'>";
-							echo "<a rel='gd_fansy' class='fancybox item act' href='/goods_images/".$product_image_path."' style='background-image: url(/goods_images/".$product_image_path.");'><div></div></a>";
-							reset($vec_product_images);																	
-							foreach ($vec_product_images as $key => $value) 
-							{
-								echo "<a rel='gd_fansy' class='fancybox item' href='/goods_images/".$key."' style='background-image: url(/goods_images/".$key.");'><div></div></a>";
-							}
-						echo "</div>";
-					//}
-					
 					echo "<div class='metk'>";
 					if ($product_discount > 0 && $product_price > 10)
 						echo "<div class='disc'><div>- ".$product_discount."%</div></div>";
@@ -71,12 +94,14 @@
 						echo "<div class='new'><div>new</div></div>";
 					echo "</div>";
 ?>
-                    <div class="gd_fansy_out">
 <?php
 					if ($product_image_path != "")
+					{
+                        echo "<div class='gd_fansy_out'>";
                         echo "<a class='fancybox gd_fansy' rel='gd_fansy' href='/goods_images/".$product_image_path."'></a>";
+                        echo "</div>";
+                    }
 ?>
-                    </div>
                 </div>
             </div>
 
@@ -91,24 +116,43 @@
 				}
 ?>
                 <h1><?php echo $product_name; ?></h1>
-                <h5>Бренд</h5>                
-                <h4><?php echo $product_brand_name; ?></h4>
-                <h5>Артикул</h5>                
+<?php
+                if ($product_price > 10)
+                {
+                    $old_price = number_format($product_old_price, 0, '.', ' ');
+                    $price = number_format($product_price, 0, '.', ' ');
+
+                    /*if (User::getPriceInEuro() == "1")
+                    {
+                        $old_price = $old_price." у.е.";
+                        $price = $price." у.е.";
+                    }
+                    else*/
+                    {
+                        $old_price = $old_price." р.";
+                        $price = $price." р.";
+                    }
+
+                    echo "<div class='price_bl' style='margin: 10px 0 10px 0;''>";
+                    echo "	<div class='rg'>";
+                    if ($product_old_price != $product_price)
+                        echo "		<div class='old'>".$old_price."</div>";
+                    echo "		<div class='curr'>".$price."</div>";
+                    echo "	</div>";
+                    echo "</div>";
+                }
+?>
+                <h5>Бренд</h5>
+                <h4><?php echo $product_brand_name; if ($product_brand_second_name != "") echo " (".$product_brand_second_name.")"; ?></h4>
+                <h5>Артикул</h5>
                 <h4><?php echo $product_articul; ?></h4>
-                <h5>Коллекция</h5>                
+                <h5>Коллекция</h5>
                 <h4><?php echo $product_collection_name; ?></h4>
-                
+
                 <h5>Цвет</h5>
-                
-                <!--<div class="color_sel">
-					<select class="selectpicker2" data-size="6" title='Выберите цвет'>
-                        <option value="1">малиновый</option>
-                    </select>
-                </div> -->
 
 				<form method='post' action='' class='jcart' id='formid' name='formid'>
 
-                  
 					<div class="color_sel" >
 						
 						<select class="selectpicker2" data-size="6" name="color_sel" title='Выберите цвет' onchange='product_color_change()'>
@@ -129,38 +173,11 @@
 					</div>
 					
 					<h5>Размеры производителя (<span style = 'color: #8597DC'>Российские размеры</span>):</h5>
-					<!--<h6>Размеры производителя:</h6>-->
 <?php
 					echo "<input id='size_manuf_sel' name='size_manuf_sel' type='hidden' value=''>";
 					echo "<div class='size_sel size_manuf_sel' name='size_sel'>";
-
-					/*reset($vec_product_sizes);																	
-					$ind = 0;
-					foreach ($vec_product_sizes as $key => $value) 
-					{
-						$key2 = str_replace("(", "(<span style = 'color: #8597DC;font-weight: bold'>", $key);
-						$key2 = str_replace(")", "</span>)", $key2);
-						
-						if ($ind === 0)
-						{
-							echo "<a class='act' href='#'>".$key2."</a>";
-						}
-						else
-							echo "<a href='#'>".$key2."</a>";
-						$ind ++;
-					}*/
 ?>
 					</div>
-					<!--<h6>Российские размеры:</h6>
-					<input id="size_ross_sel" name="size_ross_sel" type="hidden" value="29">
-					<div class="size_sel size_ross_sel">
-						<a class="act" href="#">29</a>
-						<a href="#">30</a>
-						<a href="#">31</a>
-						<a href="#">32</a>
-						<a href="#">28</a>
-					</div>-->
-					<!--<div class="lnk_table"><a href="#" data-toggle="modal" data-target="#modal_tabsize">Таблица размеров</a></div>-->
 <?php
 					if ($cntAll <= 0)
 					{
@@ -190,12 +207,12 @@
 						$old_price = number_format($product_old_price, 0, '.', ' ');
 						$price = number_format($product_price, 0, '.', ' ');
 						
-						if (User::getPriceInEuro() == "1")
+						/*if (User::getPriceInEuro() == "1")
 						{ 
 							$old_price = $old_price." у.е.";
 							$price = $price." у.е.";
 						}
-						else 
+						else*/
 						{
 							$old_price = $old_price." р.";
 							$price = $price." р.";
@@ -204,57 +221,47 @@
 						echo "<div class='price_bl'>";
 						echo "	<div class='lf' id='price_bl_lf'>";
 						echo "		<div style='display:none;' id='basket_msg'><h6 style='font-weight:bold;color: #8597DC;'>Товар добавлен в корзину</h6></div>";
-						echo "		<button style='display: -moz-inline-box;display: inline-block; float: none; text-align: center; min-width: 120px;' class='form_butt_2' name='my-add-button' type='submit' value=' '><span>ДОБАВИТЬ В КОРЗИНУ</span></button>";
-						echo "		<a class='hd_tp_butt' href='/cart.php' style='display:none;background-color: #E5B81C;' name='my-cart-button'><span>ПЕРЕЙТИ В КОРЗИНУ</span></a>";
+						echo "		<button onClick='document.favourite=0' style='display: -moz-inline-box;display: inline-block; float: left; text-align: center; min-width: 120px;' class='form_butt_2' name='my-add-button' type='submit' value=' '><span>ДОБАВИТЬ В КОРЗИНУ</span></button>";
+						echo "		<a class='hd_tp_butt' href='/cart.php' style='display:none;background-color: #E5B81C; float: left' name='my-cart-button'><span>ПЕРЕЙТИ В КОРЗИНУ</span></a>";
+						if (User::isAuthorized())
+						{
+						    //echo "<form method='post' action='' class='favourite' id='favourite' name='favourite'>";
+						    echo "		<input type='hidden' name='product_id' id='item_id' value='".$product_id."' />";
+							echo "		<input type='hidden' name='user_id' id='user_id' value='".User::getUserID()."' />";
+						    if ($product_favourite != 0)
+						        echo "		<input onClick='document.favourite=1' name='favourite' id = 'fav".$product_id."' class='fav_on' type='submit' value=' ' title = 'Удалить из избранного'><span> </span></button>";
+						    else
+						        echo "		<input onClick='document.favourite=1' name='favourite' id = 'fav".$product_id."' class='fav_off' type='submit' value=' ' title = 'Добавить в избранное'><span> </span></button>";
+						    //echo "</form>";
+						}
+						else
+						{
+						    echo "		<button name='favourite' value = ' ' class = 'fav_off' data-toggle='modal' data-target='#modal_ent'></button>";
+						}
 						echo "		<input type='hidden' name='my-item-id' id='item_id' value='".$productID."' />";
 						echo "		<input type='hidden' name='my-item-name' id='item_name' value=\"".$product_name."$".$product_articul."$".$productLatCategoryName."$".$product_collection_name."$".$product_brand_name."$".$product_image_path."\" />";
 						echo "		<input type='hidden' name='my-item-price' value='".number_format($product_price, 0, '.', '')."' />";
 						echo "		<input type='hidden' name='my-item-qty' value='1' />";
 						echo "		<div class='lnk_sklad'><a href='#' data-toggle='modal' data-target='#modal_aviable'>Проверить наличие на складе</a></div>";
 						echo "	</div>";
-						echo "	<div class='rg'>";
-						if ($product_old_price != $product_price)
-							echo "		<div class='old'>".$old_price."</div>";
-						echo "		<div class='curr'>".$price."</div>";
-						echo "	</div>";
+						//echo "	<div class='rg'>";
+						//if ($product_old_price != $product_price)
+						//	echo "		<div class='old'>".$old_price."</div>";
+						//echo "		<div class='curr'>".$price."</div>";
+						//echo "	</div>";
 						echo "</div>";
 					}
 				
 ?>
 				</form>
 
-                <div class="soc">
+                <!--<div class="soc">
                     <a class="tw" href="#"></a>
                     <a class="gp" href="#"></a>
                     <a class="in" href="#"></a>
                     <a class="fb" href="#"></a>
-                </div>
+                </div>-->
             </div>
-
-            <!--<div class="deliv_out">
-
-                <div class="deliv">
-
-                    <div class="item">
-                        <span class="stitle"><span>Доставка по Москве 350 руб.</span></span>
-                        <span class="ico ico_cart_deliv_1"></span>
-                        <span class="stat">Moscow</span>
-                    </div>
-
-                    <div class="item">
-                        <span class="stitle"><span>Доставка по России</span></span>
-                        <span class="ico ico_cart_deliv_1"></span>
-                        <span class="stat">Russia</span>
-                    </div>
-
-                    <div class="item">
-                        <span class="stitle"><span>Самовывоз</span></span>
-                        <span class="ico ico_cart_deliv_2"></span>
-                    </div>
-
-                </div>
-
-            </div>-->
 
             <div class="descr_tabs">
                 <!-- Nav tabs -->
@@ -284,107 +291,6 @@
                   </div>
                 </div>
             </div>
-
-            <!--<div class="title_points"><span>РЕКОМЕНДУЕМ</span></div>
-
-            <div class="gd_recomm_list">
-
-                <div class="gd_recomm_slider">
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_1.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_2.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_1.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_2.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_1.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_2.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_1.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_2.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_1.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                    <div class="item"><div class="gd_it">
-                        <a class="im" href="#" style="background-image: url(/img/gd_2.jpg);"></a>
-                        <div class="title">Брюки O.Silver 117</div>
-                        <div class="ord">
-                            <div class="price">3345 р.</div>
-                            <button class="order_gd" name="order_gd" type="button" value="">ПОСМОТРЕТЬ</button>
-                        </div>
-                    </div></div>
-
-                </div>
-
-            </div> -->
-
         </div>
 
     </div>

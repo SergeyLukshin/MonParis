@@ -28,6 +28,8 @@
                     if (data.data && data.data.redirect) {
                         //window.location.href = data.data.redirect;
                         window.location.reload();
+						//dataLayerYandex.push({'event': 'check_in_na'});
+						//dataLayerGoogle.push({'event': 'check_in_na'});
                     }
                 }
             },
@@ -195,17 +197,12 @@
                 if (data.message !== undefined && data.message !== null) {
                     // window.alert(data.message);
                 }
+                
                 if (data.data.redirect != "." && data.data.redirect != "") {
 					window.location.href = data.data.redirect;
 				}
-				else
-					window.location.reload();
-
-                    /*if (data.url !== undefined && data.url !== null) {
-                        window.location.href = data.url;
-                    } else {
-                        window.location.reload();
-                    }*/
+				//else
+				//	window.location.reload();
             } else if (data.status === 'err') {
                 var $mainErrorContainer = $form.find('.main-error');
                 if (data.code === 'main') {

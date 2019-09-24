@@ -45,13 +45,13 @@ class User
         return false;
     }
     
-    public static function getPriceInEuro()
+    /*public static function getPriceInEuro()
     {
         if (!empty($_SESSION["user_data"])) {
             return $_SESSION["user_data"]["UsePriceInEuro"];
         }
         return "";
-    }
+    }*/
     
     public static function getNeedBlockPrice()
     {
@@ -138,7 +138,7 @@ class User
             $this->user_data['UserID'] = $this->user_['UserID'];
 			$this->user_data['FirstName'] = $this->user_['FirstName'];//iconv("windows-1251", "UTF-8", $this->user_['FirstName']);
 			$this->user_data['BlockPrices'] = (string)$this->user_['BlockPrices'];
-			$this->user_data['UsePriceInEuro'] = (string)$this->user_['UsePriceInEuro'];
+			//$this->user_data['UsePriceInEuro'] = (string)$this->user_['UsePriceInEuro'];
 			$this->user_data['NeedRefreshBasket'] = "1";
             $this->user_data['UserLogin'] = $this->user_['Login'];
             $this->user_data['UserPhone'] = $this->user_['Phone'];

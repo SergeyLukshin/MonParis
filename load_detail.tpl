@@ -1,6 +1,6 @@
 <?php
-	$query_detail_select = "SELECT ProductID, ProductIDStr, MP_CATEGORY.LatCategoryName, PriceInEuro, Articul, ProductName, ImagePath, ";
-	$query_detail_select = $query_detail_select." MP_PRODUCT.Note, MP_BRAND.BrandID, MP_SEASON.SeasonID, BrandName, SeasonName, New, ";
+	$query_detail_select = "SELECT MP_PRODUCT.ProductID, ProductIDStr, MP_CATEGORY.LatCategoryName, MP_CATEGORY.CategoryName, PriceInEuro, Articul, ProductName, ImagePath, MP_BRAND_SEASON.NewCollection, ";
+	$query_detail_select = $query_detail_select." MP_PRODUCT.Note, MP_BRAND.BrandID, MP_SEASON.SeasonID, BrandName, MP_BRAND.SecondName AS BrandSecondName, SeasonName, New, COALESCE(MP_USER_PRODUCT.UserID, 0) AS Favourite, ";
 
 	//$price_str = "Price * (100.0 - 33.33) / 100.0";
 	//$price_discount_str = "(Price * (100.0 - 33.33) / 100.0) * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountWholesaleValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
@@ -31,11 +31,11 @@
 		}
 		else
 		{
-			if (User::getPriceInEuro() == "1")
+			/*if (User::getPriceInEuro() == "1")
 			{
 				$query_detail_select = $query_detail_select."PriceInEuro AS OldPrice, PriceInEuro AS NewPrice ";
 			}
-			else
+			else*/
 			{
 				$query_detail_select = $query_detail_select."".$price_str." AS OldPrice, ".$price_discount_str." AS NewPrice ";
 			}
@@ -46,12 +46,13 @@
 	$query_detail_from = $query_detail_from." INNER JOIN MP_BRAND ON MP_BRAND.BrandID = MP_BRAND_SEASON.BrandID";
 	$query_detail_from = $query_detail_from." INNER JOIN MP_SEASON ON MP_SEASON.SeasonID = MP_BRAND_SEASON.SeasonForSiteID";
 	$query_detail_from = $query_detail_from." INNER JOIN MP_CATEGORY ON MP_PRODUCT.CategoryID = MP_CATEGORY.CategoryID";
-	
+    $query_detail_from = $query_detail_from." LEFT JOIN MP_USER_PRODUCT ON MP_PRODUCT.ProductID = MP_USER_PRODUCT.ProductID AND MP_USER_PRODUCT.UserID = ".User::getUserID();
+
 	$query_detail_where = " WHERE MP_PRODUCT.ProductIDStr = '".$productID."'";
 	
 	$query_detail = $query_detail_select.$query_detail_from.$query_detail_where;
 
-	$result_detail = mysql_query($query_detail);	
+	$result_detail = mysql_query($query_detail);
 	
 	$product_id = 0;
 	$product_brand_name = "";
@@ -69,6 +70,9 @@
 	$vec_product_attribs = array();
 	$product_new = 0;
 	$productLatCategoryName = "";
+	$productCategoryName = "";
+	$product_is_new_collection = 0;
+	$product_favourite = 0;
 	
 	//echo $query_detail;
 	//exit();
@@ -79,6 +83,7 @@
 
 		$product_id = $row["ProductID"];
 		$product_brand_name = $row["BrandName"];
+		$product_brand_second_name = $row["BrandSecondName"];
 		$product_articul = $row["Articul"];
 		$product_name = $row["ProductName"];
 		$product_note = $row["Note"];
@@ -89,11 +94,15 @@
 		$product_discount = $row["Discount"];	
 		$product_new = $row["New"];	
 		$productLatCategoryName = $row["LatCategoryName"];	
+		$productCategoryName = $row["CategoryName"];
+		$product_is_new_collection = $row["NewCollection"];
+		$product_favourite = $row["Favourite"];
 		
 		$strTitle = $product_name." Ц купить недорого онлайн в mon-paris.ru";
-		$strDescription = $product_name." в интернет-магазине MON-PARIS Ц отлична€ покупка! ¬ыбирайте европейское качество и стиль в ћоскве с нами. Ќедорого, удобно, с удовольствием! +7-(499)-132-49-81";
+		$strDescription = "ќфициальный каталог ".$product_brand_name." ".$product_brand_second_name." ".$productCategoryName." артикул ".$product_articul." купить в интернет-магазине MON-PARIS";
+		$keywords = "<meta name=\"keywords\" content=\"".$product_brand_name." ".$product_brand_second_name." официальный каталог, женска€ одежда по каталогам, французска€ женска€ одежда, италь€нска€ женска€ одежда, распродажа женской одежды, женска€ одежда, интернет магазин женской одежды, купить женскую одежду\">";
 	
-		if (User::getPriceInEuro() == "1") $product_discount = 0;
+		//if (User::getPriceInEuro() == "1") $product_discount = 0;
 
 		$query_detail_images = "SELECT ImagePath FROM MP_PRODUCT_IMAGES WHERE ProductID = ".$product_id." ORDER BY ImagePath";
 		$detail_images = mysql_query($query_detail_images);		

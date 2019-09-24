@@ -12,7 +12,7 @@ http://www.webforce.co.nz/cart/
 **********************************************************************/
 
 // USER CONFIG
-//include_once ('../db_settings.php');
+include_once ('../db_settings.php');
 include_once('jcart-config.php');
 include_once('../classes/Auth.class.php');
 
@@ -24,18 +24,41 @@ header('content-type:text/html; charset=windows-1251');
 // JCART
 class jcart {
 	var $total = 0;
+	var $old_total = 0;
+	//var $total_promocode = 0;
 	var $itemcount = 0;
 	var $items = array();
 	var $itemprices = array();
+	var $itemprices_promocode = array();
 	var $itemqtys = array();
 	var $itemname = array();
 	var $order_number = "";
 	var $order_delivery_type = 1;
+
+	var $order_promocode = "";
+	var $order_promocode_error_message = "";
+	var $order_promocode_type = 0;
+    var $order_promocode_procent_val = 0;
+	var $order_promocode_discount_val = 0;
+	var $order_promocode_min_order_val = 0;
+	var $order_promocode_brand_id = 0;
+	var $order_promocode_season_id = 0;
 	
 	// CONSTRUCTOR FUNCTION
 	function jcart() 
 	{
+	}
 
+	function clear_promocode()
+	{
+	    $this->order_promocode = "";
+	    //$this->order_promocode_error_message = "";
+        $this->order_promocode_type = 0;
+        $this->order_promocode_procent_val = 0;
+	    $this->order_promocode_discount_val = 0;
+        $this->order_promocode_min_order_val = 0;
+	    $this->order_promocode_brand_id = 0;
+	    $this->order_promocode_season_id = 0;
 	}
 
 	// GET CART CONTENTS
@@ -49,9 +72,14 @@ class jcart {
 
 			$item['id'] = $tmp_item;
 			$item['qty'] = $this->itemqtys[$tmp_item];
-			$item['price'] = $this->itemprices[$tmp_item];
+			if ($this->order_promocode == "") {
+			    $item['price'] = $this->itemprices[$tmp_item];
+			}
+			else {
+			    $item['price'] = $this->itemprices_promocode[$tmp_item];
+			}
 			$item['name'] = $this->itemname[$tmp_item];
-			$item['subtotal'] = $item['qty'] * $item['price'];
+  			$item['subtotal'] = $item['qty'] * $item['price'];
 			$items[] = $item;
 			}
 		return $items;
@@ -65,6 +93,7 @@ class jcart {
 	// ADD AN ITEM
 	function add_item($item_id, $item_qty=1, $item_price, $item_name)
 		{
+		$this->clear_promocode();
 		// VALIDATION
 		$valid_item_qty = $valid_item_price = false;
 
@@ -96,6 +125,7 @@ class jcart {
 				$this->items[] = $item_id;
 				$this->itemqtys[$item_id] = $item_qty;
 				$this->itemprices[$item_id] = $item_price;
+				$this->itemprices_promocode[$item_id] = $item_price;
 				$this->itemname[$item_id] = $item_name;
 				}
 			$this->_update_total();
@@ -119,6 +149,7 @@ class jcart {
 	// UPDATE AN ITEM
 	function update_item($item_id, $item_qty)
 		{
+		$this->clear_promocode();
 		// IF THE ITEM QTY IS AN INTEGER, OR ZERO
 		// UPDATE THE ITEM
 		if (preg_match("/^[0-9-]+$/i", $item_qty))
@@ -143,6 +174,7 @@ class jcart {
 	// WHEN JAVASCRIPT IS ENABLED, THE CART IS UPDATED ONKEYUP
 	function update_cart()
 		{
+		$this->clear_promocode();
 		// POST VALUE IS AN ARRAY OF ALL ITEM IDs IN THE CART
 		if (is_array($_POST['jcart_item_ids']))
 			{
@@ -210,6 +242,7 @@ class jcart {
 	*/
 	function del_item($item_id)
 		{
+		$this->clear_promocode();
 		$ti = array();
 		$this->itemqtys[$item_id] = 0;
 		foreach($this->items as $item)
@@ -223,15 +256,92 @@ class jcart {
 		$this->_update_total();
 		}
 
+	function get_products_for_yandex_metrika()
+		{
+			/*[
+                {
+                    "id": "25341",
+                    "name": "Толстовка Яндекс мужская",
+                    "price": 1345.26,
+                    "brand": "Яндекс / Яndex",
+                    "category": "Одежда/Мужская одежда/Толстовки и свитшоты",
+                    "variant": "Оранжевый цвет"
+                },
+                {
+                    "id": "25314",
+                    "name": "Толстовка Яндекс женская",
+                    "price": 1543.62,
+                    "brand": "Яндекс / Яndex",
+                    "category": "Одежда/Женская одежда/Толстовки и свитшоты",
+                    "variant": "Белый цвет",
+                    "quantity": 3
+                }
+            ]*/
+			$result = "[\n";
+			$index = 0;
+			foreach($this->get_contents() as $item)
+			{
+				list($productID, $attribID) = explode("_", $item['id']);
+				list($productName, $productArticul, $productLatCategoryName, $productSeasonName, $brand, $image_path, $colors, $sizes) = explode("$", $item['name']);
+				$productCategoryName = "";
+				
+				// здесь надо выбирать категорию, т.к. она не указана
+				$query_product_info = "SELECT ProductID, CategoryName FROM MP_PRODUCT";
+				$query_product_info = $query_product_info." INNER JOIN MP_CATEGORY ON MP_CATEGORY.CategoryID = MP_PRODUCT.CategoryID";
+				$query_product_info = $query_product_info." WHERE MP_PRODUCT.ProductIDStr = '".$productID."'";
+				$result_product_info = mysql_query($query_product_info);
+				$rowCount = mysql_num_rows($result_product_info);
+				if ($rowCount == 1)
+				{
+					$row = mysql_fetch_array($result_product_info);
+					$productCategoryName = $row["CategoryName"];
+					$pID = $row["ProductID"];
+					mysql_free_result($result_product_info);
+				}
+				else
+				{
+					mysql_free_result($result_product_info);
+				}
+				
+				$brand = iconv("utf-8", "windows-1251", $brand);
+				$colors = iconv("utf-8", "windows-1251", $colors);
+				$productName = iconv("utf-8", "windows-1251", $productName);
+				//$productCategoryName = iconv("utf-8", "windows-1251", $productCategoryName);
+
+	
+				if ($index > 0)
+				{
+					$result = $result.",";
+				}
+				$result = $result."{\n";
+				$result = $result."\"id\": \"".$pID."\",\n";
+				$result = $result."\"name\": \"".$productName."\",\n";
+				$result = $result."\"price\": \"".$item['price']."\",\n";
+				$result = $result."\"brand\": \"".$brand."\",\n";
+				$result = $result."\"category\": \"".$productCategoryName."\",\n";
+				$result = $result."\"variant\": \"".$colors."\",\n";
+				$result = $result."\"quantity\": \"".$item['qty']."\"\n";
+				$result = $result."}\n";
+				
+				$index = $index + 1;
+			}
+			$result = $result."]";
+			return $result;
+		}
+
 	// EMPTY THE CART
 	function empty_cart()
 		{
+		$this->clear_promocode();
 		$this->order_number = "";
 		$this->order_delivery_type = 1;
 		$this->total = 0;
+		$this->old_total = 0;
+		//$this->total_promocode = 0;
 		$this->itemcount = 0;
 		$this->items = array();
 		$this->itemprices = array();
+		$this->itemprices_promocode = array();
 		$this->itemqtys = array();
 		$this->itemname = array();
 		}
@@ -243,21 +353,46 @@ class jcart {
 
 	// INTERNAL FUNCTION TO RECALCULATE TOTAL
 	function _update_total()
-		{
+	{
 		$old_itemcount = $this->itemcount;
 		$this->itemcount = 0;
 		$this->total = 0;
+		//$this->old_total = 0;
+		//$this->total_promocode = 0;
 		if(sizeof($this->items) > 0)
-			{
+		{
 			foreach($this->items as $item)
+			{
+				if ($this->order_promocode == "")
 				{
-				$this->total = $this->total + ($this->itemprices[$item] * $this->itemqtys[$item]);
-
+				    $this->total = $this->total + ($this->itemprices[$item] * $this->itemqtys[$item]);
+				    //$this->old_total = $this->total + ($this->itemprices[$item] * $this->itemqtys[$item]);
+				}
+				else
+				{
+				    //$this->old_total = $this->total + ($this->itemprices[$item] * $this->itemqtys[$item]);
+				    $this->total = $this->total + ($this->itemprices_promocode[$item] * $this->itemqtys[$item]);
+				}
 				// TOTAL ITEMS IN CART (ORIGINAL wfCart COUNTED TOTAL NUMBER OF LINE ITEMS)
 				$this->itemcount += $this->itemqtys[$item];
-				}
 			}
-		}		
+		}
+		if ($this->order_promocode != "" &&
+		    $this->order_promocode_type != 0)
+		{
+			if ($this->total >= $this->order_promocode_min_order_val)
+            {
+                $this->old_total = $this->total;
+                $this->total = $this->total - $this->order_promocode_discount_val;
+            }
+            else
+            {
+                $str = number_format($this->order_promocode_min_order_val, 0, '.', ' ');
+                $this->clear_promocode();
+                $this->order_promocode_error_message = "Для применения промокода необходимо сделать заказ на сумму не менее ".$str." руб.";
+            }
+	    }
+	}
 		
 	/*function display_short_cart_put($jcart)
 		{			
@@ -269,11 +404,12 @@ class jcart {
 			if (User::getNeedRefreshBasket() == "1")
 			{
 				User::setNeedRefreshBasket("0");
+				$this->clear_promocode(); // скидываем промокод, если происходит логин
 				$this->refresh_cart($jcart);
 			}
 			
 			$curr = "руб.";
-			if (User::getPriceInEuro() == "1") $curr = "у.е.";
+			//if (User::getPriceInEuro() == "1") $curr = "у.е.";
 			$str_price = number_format(($this->total), 0, '.', ' ');
 			$div = $this->itemcount % 100;
 			$str_note = "";
@@ -378,9 +514,9 @@ class jcart {
 				
 			// EMPTY THE CART
 			if($_POST['jcart_empty'])
-				{
+			{
 				$this->empty_cart();
-				}
+			}
 
 			// DETERMINE WHICH TEXT TO USE FOR THE NUMBER OF ITEMS IN THE CART
 			if ($this->itemcount >= 0)
@@ -424,7 +560,7 @@ class jcart {
 			//opt3
 			
 			$curr = "руб.";
-			if (User::getPriceInEuro() == "1") $curr = "у.е.";
+			//if (User::getPriceInEuro() == "1") $curr = "у.е.";
 
 			if($this->itemcount > 0)
 			{
@@ -551,13 +687,365 @@ _END;
 				echo "\t" . '<script type="text/javascript">$(function(){$("#jcart' . $_POST['item_id'] . '").focus()});</script>' . "\n";
 			}
 		}
-		
-	
+
+	function display_fav($jcart)
+		{
+		    if ($_POST["product_id"] && $_POST["user_id"]) {
+		        if ($_POST["user_id"] <= 0)
+		        {
+		            echo "0";
+			        return;
+		        }
+
+		        @mysql_connect(db::$my_server, db::$my_user, db::$my_pwd) or die("Could not connect to MySQL server!");
+                @mysql_select_db(db::$my_name) or die("Could not select products database!");
+                $result_fav = @mysql_query("SET NAMES \"cp1251\"");
+
+                $query_fav = "SELECT * FROM MP_USER_PRODUCT WHERE ProductID = ".$_POST["product_id"]." AND UserID = ".$_POST["user_id"];
+                $result_fav = @mysql_query($query_fav);
+                $rowCount = @mysql_num_rows($result_fav);
+
+                if ($rowCount == 0) {
+                    $query_fav = "INSERT INTO MP_USER_PRODUCT (ProductID, UserID) VALUES (".$_POST["product_id"].", ".$_POST["user_id"].")";
+                    $result_fav = @mysql_query($query_fav);
+                    echo "1";
+                    return;
+                }
+                else
+                {
+                    $query_fav = "DELETE FROM MP_USER_PRODUCT WHERE ProductID = ".$_POST["product_id"]." AND UserID = ".$_POST["user_id"];
+                    $result_fav = @mysql_query($query_fav);
+                    echo "0";
+                    return;
+                }
+			}
+			echo "0";
+			return;
+		}
+
+	function display_cart_promocode($jcart)
+		{
+			// JCART ARRAY HOLDS USER CONFIG SETTINGS
+			extract($jcart);
+
+			// ASSIGN USER CONFIG VALUES AS POST VAR LITERAL INDICES
+			// INDICES ARE THE HTML NAME ATTRIBUTES FROM THE USERS ADD-TO-CART FORM
+			$item_id = $_POST[$item_id];
+			$item_qty = $_POST[$item_qty];
+			$item_price = $_POST[$item_price];
+			$item_name = $_POST[$item_name];
+
+			//opt3
+			//$old_itemcount = $this->itemcount;
+			//opt3
+
+			if ($_POST[$set_promocode]) {
+                //$this->order_promocode = $_POST[$promocode];
+                $promocode = $_POST[$promocode];
+                $this->get_promocode_info($promocode);
+                $this->refresh_cart($jcart);
+			}
+
+			// ADD AN ITEM
+			if ($_POST[$item_add])
+				{
+				$item_added = $this->add_item($item_id, $item_qty, $item_price, $item_name);
+				//echo $item_name;
+				// IF NOT TRUE THE ADD ITEM FUNCTION RETURNS THE ERROR TYPE
+				if ($item_added !== true)
+					{
+					$error_type = $item_added;
+					switch($error_type)
+						{
+						case 'qty':
+							$error_message = $text['quantity_error'];
+							break;
+						case 'price':
+							$error_message = $text['price_error'];
+							break;
+						}
+					}
+				}
+
+			// UPDATE A SINGLE ITEM
+			// CHECKING POST VALUE AGAINST $text ARRAY FAILS?? HAVE TO CHECK AGAINST $jcart ARRAY
+			if ($_POST['jcart_update_item'] == $jcart['text']['update_button'])
+				{
+				$item_updated = $this->update_item($_POST['item_id'], $_POST['item_qty']);
+				if ($item_updated !== true)
+					{
+					$error_message = $text['quantity_error'];
+					}
+				}
+
+			// UPDATE ALL ITEMS IN THE CART
+			if($_POST['jcart_update_cart'] || $_POST['jcart_checkout'])
+				{
+				$cart_updated = $this->update_cart();
+				if ($cart_updated !== true)
+					{
+					$error_message = $text['quantity_error'];
+					}
+				}
+
+			// REMOVE AN ITEM
+			if($_GET['jcart_remove']/*$_POST['jcart_remove']*/ && !$_POST[$item_add] && !$_POST['jcart_update_cart'] && !$_POST['jcart_check_out'])
+			{
+				$this->del_item($_GET['jcart_remove']);
+				//echo $_GET['jcart_remove'];
+			}
+
+			// EMPTY THE CART
+			if($_POST['jcart_empty'])
+				{
+				$this->empty_cart();
+				}
+
+			// DETERMINE WHICH TEXT TO USE FOR THE NUMBER OF ITEMS IN THE CART
+			if ($this->itemcount >= 0)
+				{
+				$text['items_in_cart'] = $text['multiple_items'];
+				}
+			if ($this->itemcount == 1)
+				{
+				$text['items_in_cart'] = $text['single_item'];
+				}
+
+			// DEFAULT INPUT TYPE
+			// CAN BE OVERRIDDEN IF USER SETS PATHS FOR BUTTON IMAGES
+			$input_type = 'submit';
+
+			// IF THIS ERROR IS TRUE THE VISITOR UPDATED THE CART FROM THE CHECKOUT PAGE USING AN INVALID PRICE FORMAT
+			// PASSED AS A SESSION VAR SINCE THE CHECKOUT PAGE USES A HEADER REDIRECT
+			// IF PASSED VIA GET THE QUERY STRING STAYS SET EVEN AFTER SUBSEQUENT POST REQUESTS
+			if ($_SESSION['quantity_error'] == true)
+				{
+				$error_message = $text['quantity_error'];
+				unset($_SESSION['quantity_error']);
+				}
+
+			// OUTPUT THE CART
+
+			// IF THERE'S AN ERROR MESSAGE WRAP IT IN SOME HTML
+			if ($error_message)
+			{
+				$error_message = "<p class='jcart-error'>$error_message</p>";
+			}
+
+			//opt3
+			/*if ($this->itemcount >= 3 && $old_itemcount < 3 || $this->itemcount < 3 && $old_itemcount >= 3)
+			{
+				if (!(isset($_SESSION['user_wholesaler']) && $_SESSION['user_wholesaler'] != "0"))
+				{
+					$this->refresh_cart2($jcart);
+				}
+			}*/
+			//opt3
+
+			$curr = "руб.";
+			//if (User::getPriceInEuro() == "1") $curr = "у.е.";
+
+			if($this->itemcount > 0)
+			{
+				echo "	<div class='cart_list'>";
+				echo "		<div class='headtitle'>";
+				echo "			<div class='lf'>";
+				echo "				<div class='cl cl_1'>№</div>";
+				echo "			</div>";
+				echo "			<div class='rg'>";
+				echo "				<div class='cl cl_2'>Описание</div>";
+				echo "				<div class='cl cl_3'>Цена</div>";
+				echo "				<div class='cl cl_4'>Кол-во</div>";
+				echo "				<div class='cl cl_5'>Сумма</div>";
+				echo "				<div class='cl cl_6'>Действие</div>";
+				echo "			</div>";
+				echo "		</div>";
+				echo "		<div class='container cart_list_inn_1'>";
+
+				$index = 0;
+				foreach($this->get_contents() as $item_)
+				{
+					$index = $index + 1;
+
+					list($productID, $attribID) = explode("_", $item_['id']);
+					list($productName, $productArticul, $productLatCategoryName, $productSeasonName, $brand, $image_path, $colors, $sizes) = explode("$", $item_['name']);
+					$sizes = iconv("utf-8", "windows-1251", $sizes);
+					$brand = iconv("utf-8", "windows-1251", $brand);
+					$colors = iconv("utf-8", "windows-1251", $colors);
+					$productArticul = iconv("utf-8", "windows-1251", $productArticul);
+					$productName = iconv("utf-8", "windows-1251", $productName);
+					$productSeasonName = iconv("utf-8", "windows-1251", $productSeasonName);
+					$productLatCategoryName = iconv("utf-8", "windows-1251", $productLatCategoryName);
+
+					echo  "		<div class='item'>";
+					echo  "			<div class='headtitle_inn'>№</div>";
+					echo  "			<div class='lf'>";
+					echo  "				<div class='num'>".$index."</div>";
+					if ($image_path != "")
+						echo  "			<a href='/catalog/".$productLatCategoryName."/".$productID."' class='im' style='background-image: url(/goods_images/".$image_path.");'></a>";
+					echo  "			</div>";
+					echo  "			<div class='rg'>";
+					echo  "				<div class='cl cl_2'>";
+					echo  "					<div class='line title'><h6><a style = 'color: #8597DC' href='/catalog/".$productLatCategoryName."/".$productID."'>".$productName."</a></h6></div>";
+					echo  "					<div class='line'>Артикул:&nbsp; <strong>".$productArticul."</strong></div>";
+					echo  "					<div class='line'>Бренд:&nbsp; <strong>".$brand."</strong></div>";
+					echo  "					<div class='line'>Коллекция:&nbsp; <strong>".$productSeasonName."</strong></div>";
+					echo  "					<div class='line'>Размер:&nbsp; <strong>".$sizes."</strong></div>";
+					echo  "					<div class='line'>Цвет:&nbsp; <strong>".$colors."</strong></div>";
+					echo  "				</div>";
+					echo  "				<div class='cl cl_3'>";
+					echo  "					<div class='line'>";
+					//echo  "					<div class="price_old">7 500 руб.</div>";
+					echo  "						<div class='price'>".number_format(($item_['price']), 0, '.', ' ')." ".$curr."</div>";
+					//echo  "					<div class="disc">Скидка - 9%</div>";
+					echo  "					</div>";
+					echo  "				</div>";
+					echo  "				<div class='cl cl_4'>";
+					echo  "					<div class='count_out'>";
+					echo  "						<button class='minus' type='button' value='0' name = 'minus'></button>";
+					echo  "						<input name='a' type='text' id='jcart". $item_['id'] ."' value='".$item_['qty']."' maxlength='3'>";
+					echo  "						<button class='plus' type='button' value='1' name = 'plus'></button>";
+					echo  "					</div>";
+					echo  "				</div>";
+					echo  "				<div class='cl cl_5'>";
+					echo  "					<div class='line'>";
+					echo  "						<div class='price'>".number_format(($item_['subtotal']), 0, '.', ' ')." ".$curr."</div>";
+					echo  "					</div>";
+					echo  "				</div>";
+					echo  "				<div class='cl cl_6'>";
+					echo  "					<a class='del' href='?jcart_remove=!" . $item_['id'] . "' name='delete_btn'><span>Удалить</span></a>";
+					echo  "				</div>";
+					echo  "			</div>";
+					echo  "		</div>";
+
+					/*echo  "	<tr>";
+					echo  "	<td  >";
+					echo  " 	<div class='basket_info3' align='center'>".$index."</div></td>";
+					echo  "	<td  >";
+					echo  " <table cellpadding=0 cellspacing=4 border='0' width=100%><tr><td style='border-style:none;'>";
+					if ($image_path != "")
+						echo  "<a href='/goods/".$productID."'><img border='0' width=90px src='/image_product.php?nm=".$image_path."&type=2'/></a>";
+					echo  "</td>";
+					echo  " <td width=100% style='border-style:none;'><div class='basket_info3' style='margin-left:20px;'>";
+					echo  "<a href='/goods/".$productID."'><span class='bold'>".iconv("utf-8", "windows-1251", $productName).",&nbsp;".$brand."</span></a>";
+					echo "<br>Артикул: ".iconv("utf-8", "windows-1251", $productArticul);
+					if ($colors != "")
+						echo "<br>Цвет: ".iconv("utf-8", "windows-1251", $colors);
+					if ($sizes != "")
+						echo "<br>Размер: ".$sizes;
+					echo  "		<input type='hidden' name='jcart_item_name[ ]' value='" . $item_['name'] . "' />";
+					echo  "		<input type='hidden' name='jcart_item_id[ ]' value='" . $item_['id'] . "' />";
+					echo  " </div></td></tr></table>";
+					echo  "	</td>";
+					echo  "	<td align='center' ><div class='basket_info3'>";
+					echo  "		<input style='text-align:right' class='basket_info' type='text' size='3' maxlength='3' id='jcart-item-id-" . $item_['id'] . "' name='jcart_item_qty[ ]' value='" . $item_['qty'] . "' />";
+					echo  "	</div></td>";
+					echo  "	<td align='right'><div class='basket_info3'>".number_format(($item_['price']), 0, '.', ' ')."</div></td>";
+					echo  "	<td align='right' ><div class='basket_info3'>".number_format(($item_['subtotal']), 0, '.', ' ');
+					echo  " 	<input type='hidden' name='jcart_item_price[ ]' value='" . $item_['price'] . "' /></div></td>";
+
+					echo  "	<td align='center'><div class='basket_info3'>";
+					echo  "		<a class='jcart-remove ' href='?jcart_remove=" . $item_['id'] . "' style='color:#0000ff;'>удалить</a>";
+					echo  "	</div></td>";
+					echo  "</tr>";*/
+				}
+				echo  "		</div></div>";
+				if ($this->order_promocode == "") {
+				    echo  "		<div class='cart_list_itog'>";
+				    echo  "			Итого: ".number_format($this->total, 0, '.', ' ')." ".$curr;
+				    echo  "		</div>";
+				}
+				else
+				{
+				    echo  "		<div class='cart_list_old_itog'>";
+                    echo  "			".number_format($this->old_total, 0, '.', ' ')." ".$curr;
+                    echo  "		</div>";
+				    echo  "		<div class='cart_list_itog'>";
+                    echo  "			Итого: ".number_format($this->total, 0, '.', ' ')." ".$curr;
+                    echo  "		</div>";
+				    echo  "		<div class='cart_list_promocode'>";
+                    echo  "			Промокод: ".$this->order_promocode;
+                    echo  "		</div>";
+				}
+
+echo <<< _END
+                <div class="cart_list_order" hidden>
+                    <div class="block">
+_END;
+                        if ($this->order_promocode_error_message != "") {
+                            echo "<div class=\"main-error alert alert-danger\">".$this->order_promocode_error_message."</div>";
+                            $this->order_promocode_error_message = "";
+                        }
+                        else
+                            echo "<div class=\"main-error alert alert-danger hidden\"></div>";
+echo <<< _END
+                        <h5>Введите промокод:</h5>
+                        <div class="block_inn">
+                            <div class="inp_bl">
+                                <div class="form-group">
+                                    <input name="promocode" id="promocode" type="text" class="form-control fital" maxlength="16" placeholder="" value="">
+                                </div>
+                            </div>
+                            <div class="inp_bl">
+                                <div class="form-group">
+                                    <button style='display: -moz-inline-box;display: inline-block; float: none; text-align: center; min-width: auto;width: 100%;background-color: rgb(229, 184, 28);' class='form_butt_2' name='my-promocode-button' type='submit' value=' '><span>ПРИМЕНИТЬ</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="cart_list_order">
+					<a class="hd_tp_butt" href="/make_order.php"><span>ОФОРМИТЬ ЗАКАЗ</span></a>
+				</div>
+_END;
+			}
+			else
+			{
+				echo  "		<span style='text-align: center;color:#797979;'><h3>Ваша корзина пуста</h3></span>";
+			}
+			if ($_POST['jcart_update_item'])
+			{
+				echo "\t" . '<script type="text/javascript">$(function(){$("#jcart' . $_POST['item_id'] . '").focus()});</script>' . "\n";
+			}
+		}
+
+	function get_promocode_info($promocode) {
+
+        @mysql_connect(db::$my_server, db::$my_user, db::$my_pwd) or die("Could not connect to MySQL server!");
+	    @mysql_select_db(db::$my_name) or die("Could not select products database!");
+	    $result_promocode = @mysql_query("SET NAMES \"cp1251\"");
+
+	    $query_promocode = "SELECT PromoCodeType, ProcentVal, DiscountVal, MinOrderVal, COALESCE(BrandID, 0) AS BrandID, COALESCE(SeasonID, 0) AS SeasonID ";
+	    $query_promocode = $query_promocode."FROM MP_PROMOCODE WHERE PromoCodeName = '".$promocode."' AND (DateBegin IS NULL OR  TO_DAYS(DateBegin) <=  TO_DAYS(NOW())) ";
+	    $query_promocode = $query_promocode."AND (DateEnd IS NULL OR  TO_DAYS(DateEnd) >=  TO_DAYS(NOW())) AND Deleted = 0";
+	    $result_promocode = @mysql_query($query_promocode);
+		$rowCount = @mysql_num_rows($result_promocode);
+
+		if ($rowCount >= 1) {
+		    $row = mysql_fetch_array($result_promocode);
+
+		    $this->order_promocode_type = $row["PromoCodeType"];
+		    $this->order_promocode_procent_val = $row["ProcentVal"];
+		    $this->order_promocode_discount_val = $row["DiscountVal"];
+		    $this->order_promocode_min_order_val = $row["MinOrderVal"];
+		    $this->order_promocode_brand_id = $row["BrandID"];
+		    $this->order_promocode_season_id = $row["SeasonID"];
+
+		    $this->order_promocode = $promocode;
+		}
+		else {
+    	    $this->clear_promocode();
+		    $this->order_promocode_error_message = "Промокод не найден или закончился период действия.";
+		}
+		@mysql_free_result($result_promocode);
+	}
+
 	function refresh_cart($jcart)
 	{
 		// JCART ARRAY HOLDS USER CONFIG SETTINGS
 		extract($jcart);
-		
+	    $this->old_total = 0;
+
 		if($this->itemcount > 0)
 		{
 			$index = 0;
@@ -572,9 +1060,9 @@ _END;
 				$query_cost = "";
 				//$price_discount_str = "(Price * (100.0 - 33.33) / 100.0) * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountWholesaleValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
 				if (User::getUserWhosaler() == "1")
-					$price_discount_str = "Price * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountWholesaleValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
+					$price_discount_str = "MP_PRODUCT.Price * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountWholesaleValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
 				else
-					$price_discount_str = "Price * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
+					$price_discount_str = "MP_PRODUCT.Price * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
 				
 
 				if (!User::isAuthorized())
@@ -585,40 +1073,60 @@ _END;
 				{
 					if (User::getNeedBlockPrice() == "1")
 					{
-						$query_cost = "SELECT 0 AS Price ";
+						$query_cost = "SELECT 0 AS Price, 0 AS RealPrice, MP_BRAND.BrandID, MP_SEASON.SeasonID ";
 					}
 					else
 					{
-						if (User::getPriceInEuro() == "1")
+						/*if (User::getPriceInEuro() == "1")
 						{
 							$query_cost = "SELECT PriceInEuro AS Price ";
 						}
-						else
+						else*/
 						{
-							$query_cost = "SELECT ".$price_discount_str." AS Price ";
+							$query_cost = "SELECT ".$price_discount_str." AS Price, MP_PRODUCT.Price AS RealPrice, MP_BRAND.BrandID, MP_SEASON.SeasonID ";
 						}
 					}
 				}
 
 				$query_cost = $query_cost." FROM MP_PRODUCT INNER JOIN MP_BRAND_SEASON ON MP_BRAND_SEASON.GroupID = MP_PRODUCT.GroupID";
 				$query_cost = $query_cost." INNER JOIN MP_BRAND ON MP_BRAND.BrandID = MP_BRAND_SEASON.BrandID";
+				$query_cost = $query_cost." INNER JOIN MP_SEASON ON MP_SEASON.SeasonID = MP_BRAND_SEASON.SeasonID";
 				$query_cost = $query_cost." WHERE MP_PRODUCT.ProductIDStr = '".$productID."'";
 
 
 				$result_cost = mysql_query($query_cost);
 				$rowCount = mysql_num_rows($result_cost);
-			
+
 				if ($rowCount == 1)
 				{
 					$row = mysql_fetch_array($result_cost);
 					
-					if (number_format($row["Price"], 0, '.', '') != $item_['price'])
-					{	
+					//if (number_format($row["Price"], 0, '.', '') != $item_['price'])
+					//{
 						$item_['price'] = number_format($row["Price"], 0, '.', '');
 						$item_['subtotal'] = $item_['price'] * $item_['qty'];
 						$this->itemprices[$item_['id']] = $item_['price'];
-						$this->_update_total();
-					}
+						if ($this->order_promocode == "" || $this->order_promocode_type != 0)
+						    $this->itemprices_promocode[$item_['id']] = $item_['price'];
+						else {
+						    $real_price = number_format($row["RealPrice"], 0, '.', '');
+                            $brand_id = $row["BrandID"];
+                            $season_id = $row["SeasonID"];
+						    if (($this->order_promocode_brand_id == 0 || $this->order_promocode_brand_id == $brand_id) &&
+						        ($this->order_promocode_season_id == 0 || $this->order_promocode_season_id == $season_id))
+						    {
+    						    $this->old_total += $real_price * $item_['qty'];
+						        $real_price = $real_price * (100.0 - $this->order_promocode_procent_val) / 100.0;
+						        $real_price = number_format($real_price, 0, '.', '');
+						    }
+						    else
+						    {
+						        $real_price = $item_['price'];
+    						    $this->old_total += $real_price * $item_['qty'];
+						    }
+						    $this->itemprices_promocode[$item_['id']] = $real_price;
+						}
+					//}
 					
 					mysql_free_result($result_cost);
 				}
@@ -628,6 +1136,7 @@ _END;
 				}
 			}
 		}
+		$this->_update_total();
 	}
 	
 	/*function send_card($jcart, $user_fio1, $user_fio2, $user_fio3, $user_email, $user_tel, $user_size_og, $user_size_ob, $user_size_ot, $user_region, $user_address, $user_comment, $delivery_type, &$send_result)
@@ -883,18 +1392,18 @@ _END;
 
 		
 		$delivery_type = $_POST['user_delivery'];
-		
+
 		if($this->itemcount > 0)
 		{
 			if (User::isAuthorized())
 			{
-				$str_query = "insert into MP_ORDER (CustomerName, Email, Phone, City, Note, Region, Size, SumOrder, DeliveryType, UserID) values 
-					('".$user_fio."','".$user_email."','".$user_tel."','".$user_city."','".$user_comment."','".$user_region."', 'ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см', 0.0, ".$delivery_type.", ".User::getUserID().")";
+				$str_query = "insert into MP_ORDER (CustomerName, Email, Phone, City, Note, Region, Size, SumOrder, DeliveryType, UserID, PromoCode) values ";
+				$str_query = $str_query."('".$user_fio."','".$user_email."','".$user_tel."','".$user_city."','".$user_comment."','".$user_region."', 'ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см', ".$this->total.", ".$delivery_type.", ".User::getUserID().", '".$this->order_promocode."')";
 			}
 			else
 			{
-				$str_query = "insert into MP_ORDER (CustomerName, Email, Phone, City, Note, Region, Size, SumOrder, DeliveryType, UserID) values 
-					('".$user_fio."','".$user_email."','".$user_tel."','".$user_city."','".$user_comment."','".$user_region."', 'ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см', 0.0, ".$delivery_type.", -1)";
+				$str_query = "insert into MP_ORDER (CustomerName, Email, Phone, City, Note, Region, Size, SumOrder, DeliveryType, UserID, PromoCode) values ";
+				$str_query = $str_query."('".$user_fio."','".$user_email."','".$user_tel."','".$user_city."','".$user_comment."','".$user_region."', 'ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см', ".$this->total.", ".$delivery_type.", -1, '".$this->order_promocode."')";
 			}
 
 			$rollback = false;
@@ -909,7 +1418,10 @@ _END;
 			{
 				$id = mysql_insert_id();
 
+
 				$mail_str_query = "<html><head></head><body><b>Заказчик : </b> ".$user_fio."<br>";
+				if ($this->order_promocode != "")
+				    $mail_str_query = $mail_str_query."<b>Промокод : </b> ".$this->order_promocode."<br>";
 				$mail_str_query = $mail_str_query."<b>Желаемый размер : </b> ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см<br>";
 				$mail_str_query = $mail_str_query."<b>e-mail : </b> ".$user_email."<br>";
 				$mail_str_query = $mail_str_query."<b>Контактный телефон : </b> ".$user_tel."<br>";
@@ -930,6 +1442,8 @@ _END;
 				$mail_str_query2 = "<html><head></head><body>Здравствуйте, ".$user_fio."<br>";
 				$mail_str_query2 = $mail_str_query2."Вы сделали заказ в интернет-магазине mon-paris.ru<br><br>";
 				$mail_str_query2 = $mail_str_query2."Номер заказа: <b>".$id."</b><br>";
+				if ($this->order_promocode != "")
+				    $mail_str_query2 = $mail_str_query2."<b>Промокод : </b> ".$this->order_promocode."<br>";
 				$mail_str_query2 = $mail_str_query2."<b>Желаемый размер : </b> ОГ - ".$user_size_og." см, ОБ - ".$user_size_ob." см, ОТ - ".$user_size_ot." см<br>";
 				$mail_str_query2 = $mail_str_query2."<b>Контактный телефон : </b> ".$user_tel."<br>";
 				if ($delivery_type == 1)
@@ -945,7 +1459,7 @@ _END;
 				$mail_str_query2 = $mail_str_query2."<table border = 1><tr><td>Наименование товара</td><td>Бренд</td><td>Коллекция</td><td>Цвет</td><td>Размер</td><td>Количество</td><td>Цена за единицу</td><td>Стоимость</td></tr>";
 
 				$curr = "руб.";
-				if (User::getPriceInEuro() == "1") $curr = "у.е.";
+				//if (User::getPriceInEuro() == "1") $curr = "у.е.";
 
 				if ($id != 0)
 				{
@@ -990,7 +1504,7 @@ _END;
 						}
 					}
 					
-					if ($rollback == false)
+					/*if ($rollback == false)
 					{
 						$str_query = "update MP_ORDER SET SumOrder = (SELECT SUM(Cost * Count) FROM MP_ORDER_PRODUCT 
 							WHERE MP_ORDER_PRODUCT.OrderID = MP_ORDER.OrderID) WHERE OrderID = ".$id;
@@ -998,7 +1512,7 @@ _END;
 						{
 							$rollback = true;
 						}
-					}
+					}*/
 				}
 				else
 				{
@@ -1006,15 +1520,15 @@ _END;
 				}
 				$mail_str_query = $mail_str_query."</table>";
 				$mail_str_query2 = $mail_str_query2."</table>";
-				
+
 				if ($delivery_type == 1)
 				{
-					if (User::getPriceInEuro() == "1")
+					/*if (User::getPriceInEuro() == "1")
 					{
 						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
 						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.<br></body></html>";
 					}
-					else
+					else*/
 					{
 						$mail_str_query = $mail_str_query."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
 						$mail_str_query2 = $mail_str_query2."<br><b>Общая стоимость заказа : </b> ".number_format($this->total, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($this->total + 400, 0, '.', '')." ".$curr."<br></body></html>";
@@ -1059,7 +1573,7 @@ _END;
 					//$send_result = "$id";
 				
 					$mail_str_query2 = $mail_str_query2."<br><br><b>Наши контактные данные:</b><br><br>";
-					$mail_str_query2 = $mail_str_query2."117997, Москва, ул. Вавилова, 69/75, офис 809.<br>";
+					$mail_str_query2 = $mail_str_query2."117997, Москва, ул. Вавилова, 69/75, офис 602.<br>";
 					$mail_str_query2 = $mail_str_query2."тел/факс:  <b>8 (495) 518-91-65</b><br>";
 					$mail_str_query2 = $mail_str_query2."e-mail:  <b>modaopt@gmail.com</b><br>";
 					

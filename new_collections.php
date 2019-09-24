@@ -53,7 +53,7 @@
 			else
 				echo "			<td class='im'><img src='/new_collections/empty.jpg' alt=''></td>";
 			echo "			<td class='rg'>";
-			if (User::getUserLogin() == 'adoon@inbox.ru')
+			if (User::getUserLogin() == 'adoon@inbox.ru' || User::getUserLogin() == 'optmoda@gmail.com')
 			{
 				echo "				<div class='title'>Код: <span>".$value[0]."</span></div>";
 			}

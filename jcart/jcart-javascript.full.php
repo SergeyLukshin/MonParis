@@ -46,35 +46,28 @@ $(function(){
 	
 	isCheckout = 'false';
 
-	// WHEN AN ADD-TO-CART FORM IS SUBMITTED
-	$('form.jcart').submit(function(){
+    // SEND PROMOCODE
+    $('form.promocode').submit(function(){
 
-		$('button[name=my-add-button]').attr("disabled", "disabled"); // выключаем кнопку, чтобы не было повторных срабатываний
+        var promocode = $(this).find('input[name=promocode]').val();
+        var set_promocode = $(this).find('button[name=my-promocode-button]').val();
+        var $mainErrorContainer = $(this).find('.main-error');
+        $errField = $(this).find('[name|="promocode"]');
 
-		// GET INPUT VALUES FOR USE IN AJAX POST
-		var itemId = $(this).find('input[name=<?php echo $jcart['item_id']?>]').val();
-		
-		var color = $(this).find('select[name=<?php echo $jcart['item_color']?>]').val();
-		var itemAttribID = $(this).find('input[name=<?php echo $jcart['item_size']?>]').val();
-		var n = itemAttribID.split("$");
-		itemId = itemId + "_" + n[0];
-		var size = n[1];
-		
-		//var itemAttribID = $(this).find('select[name=<?php echo $jcart['item_color']?>]').val();
-		//var n = itemAttribID.split("$");
-		//itemId = itemId + "_" + n[0];
-		//var color = n[1];
-		//var size = $(this).find('input[name=<?php echo $jcart['item_size']?>]').val();
+        if (promocode == "") {
+            $msg = "Необходимо указать промокод";
 
-		var itemPrice = $(this).find('input[name=<?php echo $jcart['item_price']?>]').val();
-		var itemName = $(this).find('input[name=<?php echo $jcart['item_name']?>]').val();
-		itemName = itemName + '$' + color + '$' + size;
-		
-		var itemQty = $(this).find('input[name=<?php echo $jcart['item_qty']?>]').val();
-		var itemAdd = $(this).find('button[name=<?php echo $jcart['item_add']?>]').val();
-		
-		// SEND ITEM INFO VIA POST TO INTERMEDIATE SCRIPT WHICH CALLS jcart.php AND RETURNS UPDATED CART HTML
-		$.post('<?php echo $jcart['path'];?>jcart-relay.php', { "<?php echo $jcart['item_id']?>": itemId, "<?php echo $jcart['item_price']?>": itemPrice, "<?php echo $jcart['item_name']?>": itemName, "<?php echo $jcart['item_qty']?>": itemQty, "<?php echo $jcart['item_add']?>" : itemAdd }, function(data) {
+            if ($mainErrorContainer.hasClass('hidden')) {
+                $mainErrorContainer.removeClass('hidden');
+            }
+            $mainErrorContainer.html($msg).show();
+            $errField.focus();
+            $mainErrorContainer.fadeOut(3000);
+
+            return false;
+        }
+
+        $.post('<?php echo $jcart['path'];?>jcart-relay_promocode.php', { "<?php echo $jcart['set_promocode']?>" : set_promocode, "<?php echo $jcart['promocode']?>" : promocode }, function(data) {
 
 			// REPLACE EXISTING CART HTML WITH UPDATED CART HTML
 			var arr = data.split("|||||");
@@ -82,19 +75,88 @@ $(function(){
 			$('#jcart').html(arr[0]);
 			$('#jcart2').html(arr[1]);
 			$('.jcart-hide').remove();
-			
-			$('#basket_msg').show();
-			$('#price_bl_lf').height(75);
-			$('button[name=my-add-button]').hide();
-			$('a[name=my-cart-button]').show();
-			//$('#basket_msg').fadeIn(500);
-			//$('#basket_msg').fadeOut(3000);			
+
+            var $mainErrorContainer = $('form.promocode').find('.main-error');
+			if (!$mainErrorContainer.hasClass('hidden')) {
+                $mainErrorContainer.fadeOut(3000);
+            }
 			});
+
+        return false;
+		});
+
+	// WHEN AN ADD-TO-CART FORM IS SUBMITTED
+	$('form.jcart').submit(function(){
+
+		//var name = $("input[type=submit][clicked=true]").attr('name');
+		if (document.favourite == 1)
+		{
+            var product_id = $(this).find('input[name=product_id]').val();
+            var user_id = $(this).find('input[name=user_id]').val();
+
+            $.post('<?php echo $jcart['path'];?>jcart-relay_fav.php', { "product_id" : product_id, "user_id" : user_id }, function(data) {
+                // REPLACE EXISTING CART HTML WITH UPDATED CART HTML
+                if (data == 1 || data == '1')
+                {
+                    $('#fav' + product_id).removeClass("fav_off").addClass("fav_on");
+                    $('#fav' + product_id).attr('title', 'Удалить из избранного');
+                }
+                else
+                {
+                    $('#fav' + product_id).removeClass("fav_on").addClass("fav_off");
+                    $('#fav' + product_id).attr('title', 'Добавить в избранное');
+                }
+            });
+		}
+		else
+		{
+            $('button[name=my-add-button]').attr("disabled", "disabled"); // выключаем кнопку, чтобы не было повторных срабатываний
+
+            // GET INPUT VALUES FOR USE IN AJAX POST
+            var itemId = $(this).find('input[name=<?php echo $jcart['item_id']?>]').val();
+
+            var color = $(this).find('select[name=<?php echo $jcart['item_color']?>]').val();
+            var itemAttribID = $(this).find('input[name=<?php echo $jcart['item_size']?>]').val();
+            var n = itemAttribID.split("$");
+            itemId = itemId + "_" + n[0];
+            var size = n[1];
+
+            //var itemAttribID = $(this).find('select[name=<?php echo $jcart['item_color']?>]').val();
+            //var n = itemAttribID.split("$");
+            //itemId = itemId + "_" + n[0];
+            //var color = n[1];
+            //var size = $(this).find('input[name=<?php echo $jcart['item_size']?>]').val();
+
+            var itemPrice = $(this).find('input[name=<?php echo $jcart['item_price']?>]').val();
+            var itemName = $(this).find('input[name=<?php echo $jcart['item_name']?>]').val();
+            itemName = itemName + '$' + color + '$' + size;
+
+            var itemQty = $(this).find('input[name=<?php echo $jcart['item_qty']?>]').val();
+            var itemAdd = $(this).find('button[name=<?php echo $jcart['item_add']?>]').val();
+
+            // SEND ITEM INFO VIA POST TO INTERMEDIATE SCRIPT WHICH CALLS jcart.php AND RETURNS UPDATED CART HTML
+            $.post('<?php echo $jcart['path'];?>jcart-relay.php', { "<?php echo $jcart['item_id']?>": itemId, "<?php echo $jcart['item_price']?>": itemPrice, "<?php echo $jcart['item_name']?>": itemName, "<?php echo $jcart['item_qty']?>": itemQty, "<?php echo $jcart['item_add']?>" : itemAdd }, function(data) {
+
+                // REPLACE EXISTING CART HTML WITH UPDATED CART HTML
+                var arr = data.split("|||||");
+                // REPLACE EXISTING CART HTML WITH UPDATED CART HTML
+                $('#jcart').html(arr[0]);
+                $('#jcart2').html(arr[1]);
+                $('.jcart-hide').remove();
+
+                $('#basket_msg').show();
+                $('#price_bl_lf').height(75);
+                $('button[name=my-add-button]').hide();
+                $('a[name=my-cart-button]').show();
+                //$('#basket_msg').fadeIn(500);
+                //$('#basket_msg').fadeOut(3000);
+             });
+        }
 
 		// PREVENT DEFAULT FORM ACTION
 		return false;
 
-		});
+    });
 		
 	$('form.jcart_put').submit(function(){
 		// GET INPUT VALUES FOR USE IN AJAX POST
@@ -118,7 +180,6 @@ $(function(){
 		return false;
 
 		});
-
 
 	// WHEN THE VISITOR HITS THEIR ENTER KEY
 	// THE UPDATE AND EMPTY BUTTONS ARE ALREADY HIDDEN

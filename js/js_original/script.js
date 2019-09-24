@@ -495,6 +495,15 @@ function cart_init() {
         $(this).addClass('sel');
 
         $('#f_delivery').val($(this).data('val'));
+        
+        if ($(this).data('val') === 4)
+        {
+			$('#user_region').val('международная доставка');
+		}
+		else
+		{
+			$('#user_region').val('Москва');
+		}
 
         event.preventDefault();
     });

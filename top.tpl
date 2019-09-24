@@ -14,6 +14,7 @@
     <meta name='yandex-verification' content='5bae267bbc5bd49c' />
 
     <meta name="description" content="<?php echo $strDescription; ?>">
+    <?php if ($keywords != "") echo $keywords; ?>
     <title><?php echo $strTitle; ?></title>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +27,6 @@
 	if ($detail === 1)
 	{
 		echo "<link href=\"/js/jquery.fancybox/jquery.fancybox.css\" rel=\"stylesheet\">\n";
-		//echo "<link href=\"/3d/css/pro360.css\" media=\"screen, projection\" rel=\"stylesheet\" type=\"text/css\" />";
-		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/underscore.js\"></script>";
-		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/konva.js\"></script>";
-		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/TweenMax.min.js\"></script>";
-		//echo "<script type=\"text/javascript\" src=\"/3d/jslib/pre-loader.js\"></script>";
-		//echo "<script type=\"text/javascript\" src=\"/3d/js/preloader.js\"></script>";
-		//echo "<script type=\"text/javascript\" src=\"/3d/js/pro360.min.js\"></script>";
 	}
 	if ($main === 1)
 	{
@@ -48,27 +42,10 @@
 		echo "		isLayerFirstVisitDisabled: \"False\"";
 		echo "	};";
 		echo "	if (!(Links)) {var Links = jsInit.links;}";
-		echo "</script>";
-		echo "<script type=\"text/javascript\" src=\"/js/stickyscroll_frw.js\"></script>";
-		echo "<script type=\"text/javascript\" src=\"/js/stickyscroll_corelib.js\"></script>";
-		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/stickyscroll.css\" media=\"screen\">";
-		
-		/*<div id="layerFirstVisit" style="height: 220px;">
-			<div id="firstVisitContainer" style="height: 190px;">
-				<div class="fixedWidth">
-					<div id="layerTop">
-						<a id="closeLayer" href="#">х</a>
-					</div>
-					<div id = "news">
-						Текст новости Текст новости Текст новости
-						Текст новости Текст новости Текст новости
-						Текст новости Текст новости Текст новости
-						Текст новости Текст новости Текст новости
-						Текст новости Текст новости Текст новости
-					</div>        
-				</div>
-			</div> 
-		</div>*/
+		echo "</script>\n";
+		echo "<script type=\"text/javascript\" src=\"/js/stickyscroll_frw.js\"></script>\n";
+		echo "<script type=\"text/javascript\" src=\"/js/stickyscroll_corelib.js\"></script>\n";
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/stickyscroll.css\" media=\"screen\">\n";
 	}
 	
 	if ($bigsizes === 1 || $all === 1 || $search === 1 || $favorites === 1 || $brend_list === 1 || $cat_list === 1 || $new_col_list === 1)
@@ -81,108 +58,91 @@
 ?>
     <link href="/css/style.css?2" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-MGXKK69');</script>
+	<!-- End Google Tag Manager -->
 
 
-<!--  <script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Ads: 1038736007 -->
+	<!--<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1038736007"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  gtag('config', 'AW-1038736007');
+	</script>
 
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-7
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	<script>
+	  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
+		'phone_conversion_number': '+7(495)-518-91-65'
+	  });
+	</script>
 
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-75150789-1', 'auto');
-
-ga('send', 'pageview');
-setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
-
-</script>
------------->
-
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9896675-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-9896675-4');
-</script>
+	<script>
+	  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
+		'phone_conversion_number': '+7-(968)-827-33-87'
+	  });
+	</script>-->
 
 
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter17423986 = new Ya.Metrika({
-                    id:17423986,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/17423986" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-
-
-<!-- Global site tag (gtag.js) - Google Ads: 1038736007 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1038736007"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-1038736007');
-</script>
-
-<script>
-  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
-    'phone_conversion_number': '+7(495)-518-91-65'
-  });
-</script>
-
-<script>
-  gtag('config', 'AW-1038736007/CNn4COeEyYsBEIe1p-8D', {
-    'phone_conversion_number': '+7-(968)-827-33-87'
-  });
-</script>
-
+	<!--<script type="text/javascript">
+		var __cs = __cs || [];
+		__cs.push(["setCsAccount", "iV3EcktRGFVy3blhsRe8IE9WbTPlpvWH"]);
+	</script>
+	<script type="text/javascript" async src="https://app.comagic.ru/static/cs.min.js"></script>-->
 
 </head>
 
-
 <body>
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGXKK69"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9896675-4"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-9896675-4');
+	</script>
+
+
+	<!-- Yandex.Metrika informer -->
+	<a href="https://metrika.yandex.ru/stat/?id=17423986&amp;from=informer"
+	target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/17423986/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+	style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="17423986" data-lang="ru" /></a>
+	<!-- /Yandex.Metrika informer -->
+
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym(17423986, "init", {
+			id:17423986,
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true,
+			ecommerce:"dataLayer"
+	   });
+	   <!--window.dataLayerYandex = window.dataLayerYandex || [];-->
+	</script>
+
+	<noscript><div><img src="https://mc.yandex.ru/watch/17423986" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
 <div class="wrapp">
     <div class="container">
@@ -211,7 +171,7 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 					<span itemprop="name" style="display:none;">Mon-Paris.ru</span>
 					
 					<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <span itemprop="postalCode" style="display:none;">117997</span><span itemprop="addressLocality" style="display:none;">Москва</span><span itemprop="streetAddress" style="display:none;">ул.Вавилова, 69/75, оф. 809</span>
+                        <span itemprop="postalCode" style="display:none;">117997</span><span itemprop="addressLocality" style="display:none;">Москва</span><span itemprop="streetAddress" style="display:none;">ул.Вавилова, 69/75, оф. 602</span>
                     </div>
                     
                     <div class="header_inn_cols_2">
@@ -223,13 +183,13 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                             </div>
                         </div>
                         <div class="hcols hcols_2">
-                            <div>
-                                <div class="phone visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="tel:+74955189165">+7(495)-518-91-65</a></span></div></div></div>
-                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387">+7(968)-827-33-87</a></span></div></div></div>
-                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387">+7(968)-827-33-87</a></span></div></div></div>
+                            <div class = "comagic_phone" >
+                                <div class="phone visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="tel:+74955189165" onClick="ga('send', 'event', 'form', 'click');">+7(495)-518-91-65</a></span></div></div></div>
+                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387" onClick="ga('send', 'event', 'form', 'click');">+7(968)-827-33-87</a></span></div></div></div>
+                                <div class="phone2 visible-xs visible-sm"><div><div><span itemprop="telephone"><a href="https://wa.me/79688273387" onClick="ga('send', 'event', 'form', 'click');">+7(499)-132-49-81</a></span></div></div></div>
                                 <div class="phone visible-md visible-lg"><div><div><span itemprop="telephone">+7(495)-518-91-65</span></div></div></div>
                                 <div class="phone2 visible-md visible-lg"><div><div><span itemprop="telephone">+7(968)-827-33-87</span></div></div></div>
-                                <div class="phone2 visible-md visible-lg"><div><div><span itemprop="telephone">+7(968)-827-33-87</span></div></div></div>
+                                <div class="phone2 visible-md visible-lg"><div><div><span itemprop="telephone">+7(499)-132-49-81</span></div></div></div>
                                 <!--<div><a class="hd_tp_butt tp_recall" href="#" data-toggle="modal" data-target="#modal_feedback_1"><span>Перезвоните мне</span></a></div>-->
                             </div>
                         </div>
@@ -240,6 +200,16 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
                                     <time itemprop="openingHours" datetime="Mo-Sa 09:30-19:00, Su 09:30-18:00">Понедельник - суббота: с 9.30 до 19.00<br>
                                     Воскресенье: выходной</time>
                                 </div>
+<?php
+                                if (User::isAuthorized())
+                                {
+                                    echo "<div><a class='hd_tp_butt tp_recall' href='/catalog/izbrannoe'>";
+                                    echo "  <span style='width: auto;padding-right: 0px;height: 100%;color: #8597dc;'>.</span>";
+                                    echo "  <div style='float: left;height: 25px;margin-top: 2px;margin-left: -5px;height: 25px;width: 25px;background-image: url(/img/fav_off.svg);background-position: -3px -4px;' src='/img/fav_off.png'></div>";
+                                    echo "  <span style='width: auto;padding-right: 0px;border-left: 0px;'>ИЗБРАННОЕ</span>";
+                                    echo "</a></div>";
+                                }
+?>
                             </div>
                         </div>
                     </div>
@@ -299,9 +269,9 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
 ?>
                                 </ul></li><li><span></span>
                             <a <?php if ($catalog == 1 && $bigsizes == 1) echo "class='act'"; ?> href="/catalog/bolshie-razmery"><span>Большие размеры</span></a></li><li><span></span>
-                            <a <?php if ($new_collection_page == 1 || $catalog == 1 && $new_col_list == 1) echo "class='act'"; ?> href="/new_collections.php"><span>Новые коллекции</span></a></li><li><span></span>
-                            <a <?php if ($brends_page == 1) echo "class='act'"; ?> href="/brends.php"><span>Все бренды</span></a></li><li><span></span>
-                            <a <?php if ($opt_page == 1) echo "class='act'"; ?> href="/opt.php"><span>Оптовым покупателям</span></a></li><li><span></span>
+                            <a <?php if ($new_collection_page == 1 || $catalog == 1 && $new_col_list == 1) echo "class='act'"; ?> href="/new_collections.php"><span>Каталоги</span></a></li><li><span></span>
+                            <a <?php if ($brends_page == 1) echo "class='act'"; ?> href="/brends.php"><span>Дизайнеры</span></a></li><li><span></span>
+                            <a <?php if ($opt_page == 1) echo "class='act'"; ?> href="/opt.php"><span>Оптовикам</span></a></li><li><span></span>
                             <a <?php if ($contacts_page == 1) echo "class='act'"; ?> href="/contacts.php"><span>Контакты</span></a></li><li><span></span>
                             <a <?php if ($vacancy_page == 1) echo "class='act'"; ?> href="/vacancy.php"><span>Вакансии</span></a></li><li><span></span>
                     </ul>
@@ -329,29 +299,27 @@ setTimeout("ga('send', 'event', '15 seconds', 'read')",15000);
         </div>
 
 <?php
-	if ($detail <> 1)  echo <<< END
+	if ($main === 1)  echo <<< END
 
-<!---	
 <div class='content-wrapper' style='padding: 0 20px'>
 	<div class='content'>
-		<form action='https://lk.mailopost.ru/subscriptions/emyasaeptf56oalkm/form' charset='UTF-8' method='post'>
+		<form action='https://lk.mailopost.ru/subscriptions/u65bo6n46vgrtyxhu/form' charset='UTF-8' method='post'>
 			<div class='form-group'>
 				<label class="required" for="email">Email</label>
 				<input type="text" name="recipient[email]" id="recipient_email" value="" required="required" class="form-control" />
 			</div>
 			<div class='form-group row'>
-				<div class='col-xs-12 col-sm-4'></div>
-				<div class='col-xs-12 col-sm-8 text-right'>
-					<button class='btn btn-success' type='submit'>
+				<div class='col-xs-12 col-sm-12 text-right'>
+					<button class='btn form_butt_2' style="float:right;background-color:#ff579d;" type='submit'>
 						<i class='fi fi-return'></i>
-						<span>Подписаться на новости и акции.</span>
+						<span>Подписаться на новости и акции</span>
 					</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
---->
+
 END
 ?>
 

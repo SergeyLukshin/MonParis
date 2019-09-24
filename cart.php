@@ -45,12 +45,13 @@ var google_remarketing_only = false;
         <div class="container"><div class="title_points cart_list_title"><span> Œ–«»Õ¿</span></div></div>
 
 		<div class='container'>
-			<div id='jcart'>
-
+			<form method='post' action='' class='promocode' id='formid' name='formid'>
+			    <div id='jcart' class = "cart_promocode">
 <?php
-				$cart->display_cart($jcart);
+			    $cart->display_cart_promocode($jcart);
 ?>
-			</div>
+    			</div>
+            </form>
 		</div>
 		
     </div>

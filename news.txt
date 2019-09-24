@@ -17,29 +17,31 @@
 
 			<div class="row">
 				<div class = "col-md-6 col-sm-12">
-							<a href="https://mon-paris.ru/catalog/FLORENCE-MODE-zima-2019" TITLE="В КАТАЛОГ FLORENCE-MODE"> 
-							<!--  <font color='red' size=4 > В связи с обновлением электросети наш  <br> <b>офис будет закрыт в субботу 10 ноября.</b> <br> 
-                                                                                   Приносим извинения за доставленные неудобства.  </b> </font> </a> <br> 
-							-->
+<a href="https://mon-paris.ru/catalog/LEO&UGO-zima-2020" TITLE="В КАТАЛОГ LEO and UGO"><font color='red' size=4 > Скидки и подарки на новые коллекции!</font>   </a> <br>
+<a href="https://mon-paris.ru/catalog/LEO&UGO-zima-2020" TITLE="В КАТАЛОГ LEO and UGO"><font color='#4169E1' size=4 > Акция распостраняется на все коллекции</font>   </a> <br>
+<a href="https://mon-paris.ru/catalog/LEO&UGO-zima-2020" TITLE="В КАТАЛОГ LEO and UGO"><font color='#4169E1' size=4 > КАК ПОЛУЧИТЬ ПОДАРОК:			</font>   </a> <br>
+<font color='red' size=4 > ШАГ 1:</font>    выберите на сайте заказ и оплатите любым способом: </font> <font color='red' size=4 >на сайте /в шоуруме/ по выставленному счету		</font>    <br>
+<font color='red' size=4 > ШАГ 2:</font>    выберите подарок из представленых ниже и сообщите менеджеру или создайет новый заказ с примечанием ПОДАРОК	</font>    <br> 
+<font color='red' size=4 > ШАГ 3:</font>    получите Ваш заказ и выбранный Вами подарок </font><br> 
 
 
-							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
-							<font color='darkblue' size=2 > <u></u>Распродажа Giani Forte. Рождественское чудо от Mon Paris </font> <br></a> </font>
-							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
-							<font color='darkblue' size=2 > <u></u>Максимальная скидка 93%! Заполняйте корзину по старым ценам. <br> Но оплачиваете по </font> </a> </font> 
-							<a href="https://mon-paris.ru/catalog/GIANI-FORTE" TITLE="В каталог Giani Forte">
-							<font color='darkred' size=2 >1000 РУБЛЕЙ ЗА ЛЮБУЮ МОДЕЛЬ <br>
-							Независимо от старых цен на сайте. </b></font> <br></a> </font> 
-	
+
+							
+							
 				</div>
 				<div class = "col-md-6 col-sm-12">
-						<a href="https://mon-paris.ru/catalog/platya/plate-j716-4427" TITLE="Смотреть эту модель подробнее">		<img src="https://mon-paris.ru/goods_images/4427_1.jpg"   height='120'></a>
-           					<a href="https://mon-paris.ru/catalog/pidzhaki/pidzhak-e403-4276" TITLE="Смотреть эту модель подробнееd"> 	<img src="https://mon-paris.ru/goods_images/4276_1.jpg"   height='120'></a>
-			     			<a href="https://mon-paris.ru/catalog/yubki/yubka-b301-3824" TITLE="Смотреть эту модель подробнее">		<img src="https://mon-paris.ru/goods_images/3824_1.jpg"   height='120'></a>
-						<a href="https://mon-paris.ru/catalog/bluzki/bluzka-setka-p302-4571"Смотреть эту модель подробнее"> 	<img src="https://mon-paris.ru/goods_images/4571_1.jpg"   height='120'></a>
-						<a href="https://mon-paris.ru/catalog/bluzki/rubashka-c623-4102" TITLE="Смотреть эту модель подробнее"> 	<img src="https://mon-paris.ru/goods_images/4102_1.jpg"   height='120'></a>
-						<a href="https://mon-paris.ru/catalog/platya/plate-j062-6600" TITLE="Смотреть эту модель подробнее"> 		<img src="https://mon-paris.ru/goods_images/6600_1.jpg"   height='120'></a>
-				
+
+
+<a href="https://mon-paris.ru/catalog/bluzki/-bluza-iz-kombinirovannoj-tkani-hlopok-i-viskoza-na-zharkuyu-letnyuyu-pogodu-lot-42-523354-17482" 		TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/17482_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/bluzki/-bluza-trikotazhnaya-s-korotkim-iz-naturalnoj-viskozy-na-zharkuyu-pogodu-lot-42-523355-17483" 		TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/17483_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/bluzki/bluza-trikotazhnaya-iz-naturalnoj-viskozy-s-korotkim-rukavom-na-zharkuyu-pogodu-lot-42-523356-17487" 	TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/17487_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/bluzki/bluza-trikotazhnaya-iz-naturalnoj-viskozy-s-korotkim-rukavom-lot-42-023358-17491"				TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/17491_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/zhakety-i-kardigany/-kardigan-s-nakladnymi-karmanami-bez-rukava-pta-2706-13204" 					TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/13204_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/kardigan/stilnyj-kardigan-pryamogo-silueta--so-semnymi-nakladnymi-karmanami-artikul-pta-2707-red-16948"		TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/16948_1.jpg"   height='70'></a>
+<a href="https://mon-paris.ru/catalog/kardigan/kardigan-so-semnymi-nakladnymi-karmanami-artikul-pta-2707-grey-16947"					TITLE="Подробнее"><img src="https://mon-paris.ru/goods_images/16947_1.jpg"   height='70'></a>
+
+
+
 				</div>
 			</div>
 			<div class="row">

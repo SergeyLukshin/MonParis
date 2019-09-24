@@ -23,7 +23,7 @@
 				unset($_SESSION['user_wholesale_discount']);
 				unset($_SESSION['user_wholesaler']);
 				unset($_SESSION['user_block_prices']);
-				unset($_SESSION['user_use_price_in_euro']);
+				//unset($_SESSION['user_use_price_in_euro']);
 			}
 				
 			setcookie('login', '', 0, "/");
@@ -70,9 +70,9 @@
 			$_SESSION['user_wholesale_discount'] = $row['WholesaleDiscount'];
 			$_SESSION['user_wholesaler'] = $row['Wholesaler'];
 			$_SESSION['user_block_prices'] = $row['BlockPrices'];
-			$_SESSION['user_use_price_in_euro'] = $row['UsePriceInEuro'];
+			//$_SESSION['user_use_price_in_euro'] = $row['UsePriceInEuro'];
 			
-			if ($_SESSION['user_wholesaler'] != "0") $_SESSION['user_use_price_in_euro'] = "1"; // оптовикам показываем цены в евро
+			//if ($_SESSION['user_wholesaler'] != "0") $_SESSION['user_use_price_in_euro'] = "1"; // оптовикам показываем цены в евро
 			// если пользователь решил "запомнить себя"
 			// то ставим ему в куку логин с хешем пароля
 			$time = 86400; // ставим куку на 24 часа

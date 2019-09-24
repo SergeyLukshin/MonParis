@@ -3,6 +3,7 @@
 	
 	$strTitle = "";
 	$strDescription = "";
+	$keywords = "";
 	$strH1 = "";
 	
 	$main = 1;
@@ -225,7 +226,15 @@
 				$url_str = "catalog/bolshie-razmery";
 				$page_no_found = false;
 				$strTitle = "БОЛЬШИЕ РАЗМЕРЫ";
-			}	
+			}
+
+			if ($str === 'izbrannoe')
+			{
+				$favorites_user = 1;
+				$url_str = "catalog/izbrannoe";
+				$page_no_found = false;
+				$strTitle = "ИЗБРАННОЕ";
+			}
 
 			if (array_key_exists($str, $vec_favorites)) {
 				$favorites = 1;
@@ -241,10 +250,18 @@
 				$page_no_found = false;
 				$brend = $str;
 				
-				$strTitle = "Магазин Итальянской и Французской женской одежды ".$brend." в Москве – MON-PARIS";
-				$strDescription = "Стильные и качественные вещи из Европы от ".$brend." недорого в интернет-магазине MON-PARIS. Настоящее европейское качество в нашем городе! +7(495)-518-91-65";
-				$strH1 = "Новинки от ".$brend." – в Москве";
+				if ($vec_brand[$brend][1] != "") {
+					$strTitle = "Магазин Итальянской и Французской женской одежды ".$brend." (".$vec_brand[$brend][1].") в Москве – MON-PARIS";
+					$strDescription = "Стильные и качественные вещи из Европы от ".$brend." (".$vec_brand[$brend][1].") недорого в интернет-магазине MON-PARIS. Настоящее европейское качество в нашем городе! +7(495)-518-91-65";
+					$strH1 = "Новинки от ".$brend." (".$vec_brand[$brend][1].") – в Москве";
+				}
+				else {
+					$strTitle = "Магазин Итальянской и Французской женской одежды ".$brend." в Москве – MON-PARIS";
+					$strDescription = "Стильные и качественные вещи из Европы от ".$brend." недорого в интернет-магазине MON-PARIS. Настоящее европейское качество в нашем городе! +7(495)-518-91-65";
+					$strH1 = "Новинки от ".$brend." – в Москве";
+				}
 			}
+			
 			
 			if (array_key_exists($str, $vec_category)) {
 				$cat_list = 1;
@@ -383,7 +400,7 @@
 		$strDescription = "Вы ищете хорошую женскую одежду в Москве? Выберите стиль с Mon-Paris! В интернет-магазине или оффлайн, вы получите высочайшее качество у нас. Самые красивые и интересные вещи из Европы в наличии в Мон Париж.";
 		$strH1 = "Интернет-магазин Mon Paris – находка для любительниц настоящей европейской моды";
 		
-		include_once ("top.tpl");	
+		include_once ("top.tpl");
 		include_once ("main.tpl");
 		include_once ("bottom.tpl");
 		exit();

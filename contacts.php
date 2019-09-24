@@ -65,8 +65,10 @@ var google_remarketing_only = false;
 
                     <div class="item">
                         <div class="title">Наши контакты:<div class="ico ico_phone"></div></div>
-                        Многоканальный: &nbsp; <span itemprop="telephone">+7-(495)-518-91-65</span><br>
-                        Мобильный Билайн: &nbsp; <span itemprop="telephone">+7-(968)-827-33-87</span>
+                        <div class="comagic_phone3">
+							Многоканальный: &nbsp; <span itemprop="telephone">+7-(495)-518-91-65</span><br>
+							Мобильный Билайн: &nbsp; <span itemprop="telephone">+7-(968)-827-33-87</span>
+						</div>
                     </div>
 
                     <div class="item">

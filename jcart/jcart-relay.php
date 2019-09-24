@@ -22,7 +22,7 @@ if(!is_object($cart))
 }
 
 // PROCESS INPUT AND RETURN UPDATED CART HTML
-$cart->display_cart($jcart);
+$cart->display_cart_promocode($jcart);
 echo "|||||";
 $cart->display_short_cart($jcart);
 ?>

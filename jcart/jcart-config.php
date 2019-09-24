@@ -15,6 +15,9 @@ $jcart['item_price']	= 'my-item-price';		// ITEM PRICE
 $jcart['item_qty']		= 'my-item-qty';		// ITEM QTY
 $jcart['item_add']		= 'my-add-button';		// ADD-TO-CART BUTTON
 
+$jcart['set_promocode']  = 'my-promocode-button';
+$jcart['promocode']  = 'promocode';
+
 $jcart['item_id_put']		= 'my-item-id_put';			// ITEM ID
 $jcart['item_add_put']		= 'my-add-button_put';		// ADD-TO-CART BUTTON
 

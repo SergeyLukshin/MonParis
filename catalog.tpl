@@ -49,6 +49,10 @@
 			{
 				echo "<li>Большие размеры</li>";
 			}
+			if ($favorites_user === 1)
+			{
+				echo "<li>Избранное</li>";
+			}
 			// если есть примененные фильтры - показываем кнопку
 			if ($filter_min_price != "500" || $filter_max_price != "100000" || $filter_discount != "0" ||
 				$str_filter_size != "" || $str_filter_color != "" || $str_filter_brand != "" || $str_filter_collection != "")
@@ -156,11 +160,18 @@
 											reset($vec_brand);
 											foreach($vec_brand as $key=>$value)
 											{
-												if (in_array($key, $filter_brand_select))
-													echo "<li><a data-id='".$value."' class='act' href='#'><input name='filter_brand[]' type='hidden' value='".$key."'>".$key."</a></li>";
-												else
-													echo "<li><a data-id='".$value."' href='#'><input name='filter_brand[]' type='hidden' value=''>".$key."</a></li>";
-													
+												if ($value[1] != "") {
+													if (in_array($value[0], $filter_brand_select))
+														echo "<li><a data-id='".$value[0]."' class='act' href='#'><input name='filter_brand[]' type='hidden' value='".$key."'>".$key." (".$value[1].")</a></li>";
+													else
+														echo "<li><a data-id='".$value[0]."' href='#'><input name='filter_brand[]' type='hidden' value=''>".$key." (".$value[1].")</a></li>";
+												}
+												else {
+													if (in_array($value[0], $filter_brand_select))
+														echo "<li><a data-id='".$value[0]."' class='act' href='#'><input name='filter_brand[]' type='hidden' value='".$key."'>".$key."</a></li>";
+													else
+														echo "<li><a data-id='".$value[0]."' href='#'><input name='filter_brand[]' type='hidden' value=''>".$key."</a></li>";
+												}
 												//$ind ++;
 												
 												/*if ($ind == $cnt)
@@ -300,7 +311,8 @@
 						
 						while ($row = mysql_fetch_array($result_product)):
 							
-							$discount = $row["Discount"];						
+							$discount = $row["Discount"];
+							$is_new_collection = $row["NewCollection"];
 
 							$small_path = "";
 							if ($row["ImagePath"] != "")
@@ -312,23 +324,50 @@
 							$old_price = number_format($row["OldPrice"], 0, '.', ' ');
 							$price = number_format($row["NewPrice"], 0, '.', ' ');
 							
-							if (User::getPriceInEuro() == "1")
+							/*if (User::getPriceInEuro() == "1")
 							{ 
 								$old_price = $old_price." у.е.";
 								$price = $price." у.е.";
 								$discount = 0;
 							}
-							else 
+							else*/
 							{
 								$old_price = $old_price." р.";
 								$price = $price." р.";
 							}
 						
-							echo "<div class='item'><div class='gd_it'>";
+							echo "<div class='item' id = 'item".$row["ProductID"]."'><div class='gd_it'>";
+							if (User::isAuthorized())
+							{
+							    if ($favorites_user !== 1)
+                                    echo "<form method='post' action='' class='favourite' id='formid' name='formid'>";
+                                else
+                                    echo "<form method='post' action='' class='favourite_del' id='formid' name='formid'>";
+								echo "		<input type='hidden' name='product_id' id='item_id' value='".$row["ProductID"]."' />";
+								echo "		<input type='hidden' name='user_id' id='user_id' value='".User::getUserID()."' />";
+								if ($row["Favourite"] == 0)
+								{
+									echo "		<button id = 'fav".$row["ProductID"]."' type='submit' name='my-fav-button' value = ' ' class = 'fav_off'></button>";
+								}
+								else
+								{
+									echo "		<button id = 'fav".$row["ProductID"]."' type='submit' name='my-fav-button' value = ' ' class = 'fav_on'></button>";
+								}
+								echo "</form>";
+							}
+							else
+							{
+							    echo "		<button name='my-fav-button' value = ' ' class = 'fav_off' data-toggle='modal' data-target='#modal_ent'></button>";
+							}
 							if ($small_path != "")
 								echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."' style='background-image: url(/goods_images/".$small_path.");'></a>";
 							else
-								echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."'></a>";
+							{
+							    if ($is_new_collection != 0)
+							        echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."' style='background-image: url(/img/empty_small.png);'></a>";
+							    else
+								    echo "	<a class='im' href='/catalog/".$row["LatCategoryName"]."/".$row["ProductIDStr"]."'></a>";
+							}
 							echo "	<div class='inf'>";
 
 							echo "<div class='otm'>";
@@ -338,7 +377,10 @@
 									echo "<div class='new'><div>new</div></div>";
 							echo "</div>";
 					
-							echo "		<div class='brend'>".$row["BrandName"]."</div>";
+							if ($row["BrandSecondName"] != "")
+								echo "		<div class='brend'>".$row["BrandName"]." (".$row["BrandSecondName"].")</div>";
+							else
+								echo "		<div class='brend'>".$row["BrandName"]."</div>";
 							echo "		<div class='title'>".$row["ProductName"]."</div>";
 							echo "	</div>";
 							if ($row["NewPrice"] > 10)
@@ -363,8 +405,21 @@
 					}
 					else
 					{
-						echo "<div><h4><p><br><br>По Вашему запросу ничего не найдено.</p></h4></div>";
+					    if ($favorites_user !== 1)
+						    echo "<div><h4><p><br><br>По Вашему запросу ничего не найдено.</p></h4></div>";
+						else
+						{
+                            echo "<div><h4><p><br><br>Сейчас у вас ничего нет в «Избранном»</p></h4></div>";
+                            echo "<div><p>Чтобы добавить понравившийся товар в «Избранное», отметьте его «сердцем» <ins class='wishlist_img'></ins>! Это можно сделать как со страницы товара, так и из общего каталога.</p></div>";
+                            echo "<div><p>Список избранных товаров сохраняется с вашим аккаунтом, что удобно, когда вы пользуетесь несколькими устройствами. Например, если вы переключаетесь между компьютером, планшетом и смартфоном.</p></div>";
+                            echo "<div><p>Добавив товар в Избранное, вы легко сможете вернуться к нему в удобное для вас время. Например, можно добавить понравившуюся вам модель в случае отсутствия подходящего размера, что позволит удобнее отслеживать пополнения ассортимента.</p></div>";
+						}
 					}
+					
+					/*foreach($filter_brand_select as $value)
+					{
+						echo "<div><h4><p><br><br>".$value."</p></h4></div>";
+					}*/
 					
 					mysql_free_result($result_product);
 

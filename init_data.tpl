@@ -63,7 +63,7 @@
 
 	//if (!isset($_SESSION['brand']))
 	{
-		$query = "SELECT MP_BRAND.BrandID, MP_BRAND.BrandName, MP_SEASON.SeasonID, MP_SEASON.SeasonName FROM MP_BRAND_SEASON ";
+		$query = "SELECT MP_BRAND.BrandID, MP_BRAND.BrandName, MP_BRAND.SecondName AS BrandSecondName, MP_SEASON.SeasonID, MP_SEASON.SeasonName FROM MP_BRAND_SEASON ";
 		$query = $query."INNER JOIN MP_BRAND ON MP_BRAND.BrandID = MP_BRAND_SEASON.BrandID ";
 		$query = $query."INNER JOIN MP_SEASON ON MP_SEASON.SeasonID = MP_BRAND_SEASON.SeasonForSiteID ";
 		$query = $query."WHERE MP_BRAND_SEASON.Invisible = 0 AND MP_SEASON.Invisible = 0 AND MP_BRAND_SEASON.CntProduct > 0 ";
@@ -71,8 +71,7 @@
 		$result4 = mysql_query($query); 
 		
 		while ($row = mysql_fetch_array($result4)): 
-			//$vec_brand[$row["BrandName"]][$row["SeasonID"]] = $row["SeasonName"];
-			$vec_brand[$row["BrandName"]] = $row["BrandID"];
+			$vec_brand[$row["BrandName"]] = array($row["BrandID"], $row["BrandSecondName"]);
 		endwhile;
 		mysql_free_result($result4);																						
 		//$_SESSION['brand'] = $vec_brand;

@@ -37,6 +37,7 @@
 	$search = 0;
 	$detail = 0;
 	$productID = 0;
+	$favorites_user = 0;
 	
 	//if (!isset($_SESSION['favorites']))
 	{

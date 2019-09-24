@@ -40,6 +40,8 @@
 			foreach ($vec_brand as $key => $value) 
 			{
 				$title = str_replace("-", "<wbr>-<wbr>", $key);
+				$title2 = str_replace("-", "<wbr>-<wbr>", $value[1]);
+				if ($title2 != "") $title = $title." (".$title2.")";
 				echo "<a class='item' href='/catalog/".$key."'>";
 				if (file_exists("brends/".$key.".jpg"))
 					echo "    <div class='bg' style='background-image: url(/brends/".$key.".jpg);'></div>";

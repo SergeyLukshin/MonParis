@@ -20,11 +20,11 @@
                             <a class="fb" href="https://facebook.com/moscowtradeoffice"></a>
                         </div>
                     </div>
-                    <div class="col_1_k">
+                    <div class="col_1_k comagic_phone2">
                         <div class="title">Наши контакты:</div>
-                        <div>Многоканальный: <div><span itemprop="telephone">+7-(495)-518-91-65</span></div></div>
-                        <div>Телефон/факс: <div><span itemprop="faxNumber">+7-(499)-132-49-81</span></div></div>
-                        <div>Мобильный Билайн: <div><span itemprop="telephone">+7-(968)-827-33-87</span></div></div>
+						<div>Многоканальный: <div><span itemprop="telephone">+7-(495)-518-91-65</span></div></div>
+						<div>Телефон/факс: <div><span itemprop="faxNumber">+7-(499)-132-49-81</span></div></div>
+						<div>Мобильный Билайн: <div><span itemprop="telephone">+7-(968)-827-33-87</span></div></div>
                     </div>
                 </div>
                 <div class="clearfix clear_cols"></div>
@@ -32,7 +32,7 @@
                 <div class="cols col_2">
                     <div class="col_1_a"  itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                         <div class="title">Наши адреса:</div>
-                        <span itemprop="postalCode">117997</span>, <span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">ул.Вавилова, 69/75, оф. 809</span>
+                        <span itemprop="postalCode">117997</span>, <span itemprop="addressLocality">Москва</span>, <span itemprop="streetAddress">ул.Вавилова, 69/75, оф. 602</span>
                     </div>
                     <div class="col_1_t">
                         <div class="title">Часы работы:</div>
@@ -634,6 +634,12 @@ echo <<< END2
 		<script type="text/javascript" src="/jcart/jcart-javascript.full.php"></script>
 END2;
 	}
+	else
+	{
+echo <<< END2
+		<script type="text/javascript" src="/jcart/jcart-javascript.full2.php"></script>
+END2;
+	}
 
 
 	if ($detail != 0)
@@ -707,6 +713,7 @@ END1;
 	var widgetId1;
     var widgetId2;
 
+    document.favourite=0;
 
 	var onloadCallback = function() {
 		

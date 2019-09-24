@@ -1,12 +1,29 @@
+<!-- Yandex.Metrika -->
+<script type="text/javascript">
+	<!--window.dataLayer = window.dataLayerYandex || [];-->
+	
+	dataLayer.push({
+		"ecommerce": {
+			"purchase": {
+				"actionField": {
+					"id" : "<?php  echo $cart->order_number; ?>"
+				},
+				"products": <?php  echo $cart->get_products_for_yandex_metrika(); ?>				
+			}
+		}
+	});
+</script>
+<!-- /Yandex.Metrika -->
+
 <?php		
 		$order_number = $cart->order_number;
 		$order_delivery_type = $cart->order_delivery_type;
 		$order_cost = $cart->total;
-		
+
 		$cart->empty_cart();
 
 		$curr = "руб.";
-		if (User::getPriceInEuro() == "1") $curr = "у.е.";
+		//if (User::getPriceInEuro() == "1") $curr = "у.е.";
 		
 		$commission = $order_cost * 4 / 100;
 		$delivery_cost = 0;
@@ -43,11 +60,11 @@
 						<td><strong><?php 
 							if ($order_delivery_type == 1) 
 							{
-								if (User::getPriceInEuro() == "1")
+								/*if (User::getPriceInEuro() == "1")
 								{
 									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 400 руб.";
 								}
-								else
+								else*/
 								{
 									echo number_format($order_cost, 0, '.', '')." ".$curr." + доставка по Москве 400 руб. = ".number_format($order_cost + 400, 0, '.', '')." ".$curr;
 									$delivery_cost = 400;
@@ -72,7 +89,7 @@
 				<div class="clearfix"></div>
 				Перейти на <a href="/">главную</a>
 <?php
-				if (User::getPriceInEuro() != "1")
+				//if (User::getPriceInEuro() != "1")
 				{
 					echo "<br><br>Если Вы хотите оплатить Ваш заказ online, нажмите на кнопку \"Оплатить\"<br>";
 					echo "<br><table><tr>";

@@ -1,10 +1,9 @@
 <?php
 	$cnt_on_page = 39;
 
-	$query_product_select = "SELECT ProductID, ProductIDStr, MP_CATEGORY.LatCategoryName, ProductSort, AbsentInStock, SortValue, PriceInEuro, Articul, ProductName, ImagePath, MP_BRAND_SEASON.NewCollection, ";
-	$query_product_select = $query_product_select." MP_PRODUCT.Note, IF(imagepath = \"\", 1, 0) AS ImageIsAbsent, MP_BRAND.BrandID, MP_SEASON.SeasonID, ";
-	$query_product_select = $query_product_select." BrandName, SeasonName, MP_PRODUCT.New, ";
-
+	$query_product_select = "SELECT MP_PRODUCT.ProductID, ProductIDStr, MP_CATEGORY.LatCategoryName, ProductSort, AbsentInStock, SortValue, PriceInEuro, Articul, ProductName, ImagePath, MP_BRAND_SEASON.NewCollection, ";
+	$query_product_select = $query_product_select." MP_PRODUCT.Note, IF(imagepath = \"\", 1, 0) AS ImageIsAbsent, MP_BRAND.BrandID, MP_SEASON.SeasonID, COALESCE(MP_USER_PRODUCT.UserID, 0) AS Favourite, ";
+	$query_product_select = $query_product_select." BrandName, MP_BRAND.SecondName AS BrandSecondName, SeasonName, MP_PRODUCT.New, ";
 
 	//$price_str = "Price * (100.0 - 33.33) / 100.0";
 	//$price_discount_str = "(Price * (100.0 - 33.33) / 100.0) * (100.0 - IF(MP_PRODUCT.DiscountProductValue = 0, MP_BRAND_SEASON.DiscountWholesaleValue, MP_PRODUCT.DiscountProductValue)) / 100.0";
@@ -24,7 +23,7 @@
 	{
 		$strIDs = $vec_favorites[$fav_products]['products'];
 		$vecIDs = split (",", $strIDs);
-		$strFav = "CASE ProductID";
+		$strFav = "CASE MP_PRODUCT.ProductID";
 		for ( $i = 0 ; $i < count ( $vecIDs ); $i ++)
 		{
 			$strFav = $strFav." WHEN ".$vecIDs[$i]." THEN ".$i;
@@ -47,11 +46,11 @@
 		}
 		else
 		{
-			if (User::getPriceInEuro() == "1")
+			/*if (User::getPriceInEuro() == "1")
 			{
 				$query_product_select = $query_product_select."PriceInEuro AS OldPrice, PriceInEuro AS NewPrice ";
 			}
-			else
+			else*/
 			{
 				$query_product_select = $query_product_select."".$price_str." AS OldPrice, ".$price_discount_str." AS NewPrice ";
 			}
@@ -62,6 +61,7 @@
 	$query_product_from = $query_product_from." INNER JOIN MP_BRAND ON MP_BRAND.BrandID = MP_BRAND_SEASON.BrandID";
 	$query_product_from = $query_product_from." INNER JOIN MP_SEASON ON MP_SEASON.SeasonID = MP_BRAND_SEASON.SeasonForSiteID";
 	$query_product_from = $query_product_from." INNER JOIN MP_CATEGORY ON MP_PRODUCT.CategoryID = MP_CATEGORY.CategoryID";
+	$query_product_from = $query_product_from." LEFT JOIN MP_USER_PRODUCT ON MP_PRODUCT.ProductID = MP_USER_PRODUCT.ProductID AND MP_USER_PRODUCT.UserID = ".User::getUserID();
 	
 	$query_product_where = " WHERE MP_PRODUCT.Invisible = 0 AND MP_BRAND_SEASON.Invisible = 0 AND MP_SEASON.Invisible = 0 AND MP_BRAND_SEASON.CntProduct > 0 AND MP_PRODUCT.CountAttrib > 0";
 	if (!User::isAuthorized()) /*если пользователь неавторизован, скрываем коллекции с флагом не показывать цену*/
@@ -82,6 +82,7 @@
 		$query_product_where = $query_product_where." AND MP_PRODUCT.ProductID IN (".$vec_favorites[$fav_products]['products'].")";
 	}
 	if ($bigsizes != 0) $query_product_where = $query_product_where." AND BigSize <> 0";
+	if ($favorites_user != 0)  $query_product_where = $query_product_where." AND COALESCE(MP_USER_PRODUCT.UserID, 0) <> 0";
 	//if ($cat_list != 0 && $category != "") $query_product_where = $query_product_where." AND MP_PRODUCT.CategoryID = ".$category;
 	if ($cat_list != 0 && $category != "") $query_product_where = $query_product_where." AND MP_CATEGORY.LatCategoryName = '".$category."'";
 	if ($brend_list != 0 && $brend != "") $query_product_where = $query_product_where." AND MP_BRAND.BrandName = '".$brend."'";
@@ -89,8 +90,11 @@
 	if ($new_col_list != 0 && $new_collection != "") $query_product_where = $query_product_where." AND CONCAT(MP_BRAND.BrandName, '-', MP_SEASON.LatSeasonName) = '".$new_collection."'";
 	if ($search != 0)
 	{
-		$query_product_where = $query_product_where." AND (Articul LIKE '%".$search_txt."%' OR ProductName LIKE '%".$search_txt."%'";
-		$query_product_where = $query_product_where." OR BrandName LIKE '%".$search_txt."%' OR SeasonName LIKE '%".$search_txt."%')";
+		$search_txt_ = str_replace(' ', '', $search_txt);
+		$query_product_where = $query_product_where." AND (Articul LIKE '%".$search_txt_."%' OR ProductName LIKE '%".$search_txt_."%'";
+		$query_product_where = $query_product_where." OR REPLACE(BrandName, '_', '') LIKE '%".$search_txt_."%' OR REPLACE(MP_BRAND.SecondName, '_', '') LIKE '%".$search_txt_."%'";
+		$query_product_where = $query_product_where." OR REPLACE(BrandName, '-', '') LIKE '%".$search_txt_."%' OR REPLACE(MP_BRAND.SecondName, '-', '') LIKE '%".$search_txt_."%'";
+		$query_product_where = $query_product_where." OR REPLACE(SeasonName, ' ', '') LIKE '%".$search_txt_."%')";
 	}
 	// -------------------------------
 	
@@ -104,8 +108,8 @@
 	if ($str_filter_color == "" && $str_filter_size != "") $query_product_where = $query_product_where." AND EXISTS (SELECT AttribID FROM MP_PRODUCT_ATTRIB AS pa 
 		WHERE pa.ProductID = MP_PRODUCT.ProductID AND RussianSize IN (".$str_filter_size."))";
 
-	if ($filter_discount != "0" && User::getPriceInEuro() != "1") $query_product_user_where = $query_product_user_where." AND Discount > 0";
-	if ($filter_discount != "0" && User::getPriceInEuro() == "1") $query_product_user_where = $query_product_user_where." AND 1 = 0"; // у валютчиков нет скидок
+	if ($filter_discount != "0" /*&& User::getPriceInEuro() != "1"*/) $query_product_user_where = $query_product_user_where." AND Discount > 0";
+	//if ($filter_discount != "0" && User::getPriceInEuro() == "1") $query_product_user_where = $query_product_user_where." AND 1 = 0"; // у валютчиков нет скидок
 	if ($filter_min_price != "500") $query_product_user_where = $query_product_user_where." AND NewPrice >= ".$filter_min_price;
 	if ($filter_max_price != "100000") $query_product_user_where = $query_product_user_where." AND NewPrice <= ".$filter_max_price;
 	if ($str_filter_brand != "") $query_product_user_where = $query_product_user_where." AND BrandID IN (".$str_filter_brand.")";

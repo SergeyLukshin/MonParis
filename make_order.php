@@ -176,6 +176,7 @@
 									<label for="f_addr_statat">Регион</label>
 									<div class="form-group">
 										<select name="user_region" size="1" class="form-control fital" id = "user_region">
+											<option value="международная доставка">международная доставка</option>
 											<option value="Москва" selected>Москва</option>
 											<option value="Московская область">Московская область</option>
 											<option value="Адыгея респ.">Адыгея респ.</option>
